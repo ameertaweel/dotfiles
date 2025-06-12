@@ -8,6 +8,7 @@
     ../../modules/home-manager/browsers/tor.nix
     ../../modules/home-manager/core.nix
     ../../modules/home-manager/documents/zathura.nix
+    ../../modules/home-manager/emacs
     ../../modules/home-manager/fonts.nix
     ../../modules/home-manager/git.nix
     ../../modules/home-manager/gnome.nix
@@ -31,5 +32,4 @@
     element-desktop
   ];
 
-  programs.emacs.enable = true;
 }

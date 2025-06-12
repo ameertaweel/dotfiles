@@ -1,8 +1,9 @@
-{inputs, ...}: {
-  imports = [inputs.nix-doom-emacs.hmModule];
+{...}: {
+  programs.emacs.enable = true;
 
-  programs.doom-emacs = {
-    enable = true;
-    doomPrivateDir = ./doom;
+  home.file.doomEmacsConfig = {
+    target = ".doom.d";
+    source = ./doom;
+    recursive = true;
   };
 }

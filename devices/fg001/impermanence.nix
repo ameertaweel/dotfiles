@@ -37,7 +37,6 @@
       directories = [
         "dotfiles"
         ".emacs.d"
-        ".doom.d"
         "knowledge-base"
         ".config/BraveSoftware/Brave-Browser"
         {
