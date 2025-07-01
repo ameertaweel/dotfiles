@@ -134,6 +134,7 @@ in {
       activities-button = false;
       events-button = false;
       world-clock = false;
+      support-notifier-type = 0;
     };
 
     # Clipboard Manager

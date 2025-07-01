@@ -46,9 +46,9 @@
   :init
   ;; If you use `org' and don't want your org files in the default location below,
   ;; change `org-directory'. It must be set before org loads!
-  (setq org-directory "~/knowledge-base/")
-  (setq org-agenda-files '("~/knowledge-base/" "~/knowledge-base/daily"))
-  (setq org-roam-directory "~/knowledge-base/")
+  (setq org-directory "~/knowledge-base/org/")
+  (setq org-agenda-files '("~/knowledge-base/org/" "~/knowledge-base/org/daily/"))
+  (setq org-roam-directory "~/knowledge-base/org/")
   (setq org-roam-dailies-directory "daily")
   (setq org-hide-emphasis-markers t)
   ; Code that runs after the package is loaded
