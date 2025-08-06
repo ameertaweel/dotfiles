@@ -18,6 +18,7 @@ Perform all available Windows updates.
 
 ## Settings
 
+- Set Display Resolution: `1920 x 1080`
 - Enable Hibernation
 - Use best performance power profile
 - Enable Clipboard History
@@ -41,18 +42,43 @@ Perform all available Windows updates.
 - Set country to Palestinian Authority.
 - Set regional format to English (Europe).
 
-## Install Software via WinGet
+## Install PowerShell 7
+
+- Install via WinGet:
+  ```powershell
+  winget install Microsoft.PowerShell
+  ```
+- Set PowerShell 7 as the default profile in Windows Terminal.
+
+## Install Editors
 
 ```powershell
-winget install Microsoft.PowerShell
-
 winget install Microsoft.Edit
 winget install vim.vim
 winget install Neovim.Neovim
 winget install Microsoft.VisualStudioCode
+```
 
-winget install Git.Git
+## Install Git
 
+- Install via WinGet:
+  ```powershell
+  winget install Git.Git
+  ```
+- Configure Git:
+  ```powershell
+  git config --global user.email "$EMAIL"
+  git config --global user.name "$FULL_NAME"
+  git config --global init.defaultBranch master
+  ```
+- Generate SSH Key:
+  ```powershell
+  ssh-keygen -t ed25519 -C "$USERNAME@$HOSTNAME"
+  ```
+
+## Install Software via WinGet
+
+```powershell
 winget install wez.wezterm
 
 winget install Brave.Brave
@@ -66,16 +92,23 @@ winget install SumatraPDF.SumatraPDF
 
 winget install Proton.ProtonPass
 
+winget install 9NKSQGP7F2NH # WhatsApp From Microsoft Store
+winget install Telegram.TelegramDesktop
 winget install Discord.Discord
 
 winget install Valve.Steam
 ```
 
-## Install WSL (Windows Subsystem for Linux)
+## Default Apps
 
-```powershell
-wsl --install
-```
+- Set VLC as default media player
+- Set Firefox as default browser
+- Set Firefox as default PDF viewer
+
+## Don't Launch on Startup
+
+- Disable launch on startup in Discord
+- Disable launch on startup in Steam
 
 ## Install NVIDIA App
 
@@ -91,38 +124,32 @@ wsl --install
 
 ## Microsoft PowerToys
 
-Install Microsoft PowerToys:
-
-```powershell
-winget install Microsoft.PowerToys
-```
-
-Enable the following modules:
-
-- Command Not Found
-- Environment Variables
-- File Locksmith
-- Hosts File Editor
-- Image Resizer
-- PowerRename
-- Registry Preview
-- Keyboard Manager
+- Install via WinGet:
+  ```powershell
+  winget install Microsoft.PowerToys
+  ```
+- Enable preview pane in file explorer.
+- Enable the following modules:
+  - Command Not Found
+  - Environment Variables
+  - File Locksmith
+  - Hosts File Editor
+  - Image Resizer
+  - PowerRename
+  - Registry Preview
+  - Keyboard Manager
 
 ### Keybindings
 
 - Map "Caps Lock" to "Control (Left)"
 
-## Generate SSH Key
+## Games
 
-```powershell
-ssh-keygen -t ed25519 -C "$USERNAME@$HOSTNAME"
-```
+### Need for Speed: Most Wanted (2005)
 
-## Install Need for Speed: Most Wanted (2005)
+Copy game files.
 
-Apply widescreen fix.
-
-## Install Command and Conquer Generals Zero Hour
+### Command and Conquer Generals Zero Hour
 
 - Install the EA App:
   ```powershell
@@ -136,3 +163,11 @@ Apply widescreen fix.
 - Install GenTool.
 - Install Community Map Pack.
 - Install Radmin VPN.
+
+## Install WSL (Windows Subsystem for Linux)
+
+- Restart computer
+- Install WSL:
+  ```powershell
+  wsl --install
+  ```
