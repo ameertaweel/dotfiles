@@ -109,6 +109,9 @@ winget install Valve.Steam
 
 - Disable launch on startup in Discord
 - Disable launch on startup in Steam
+- Disable launch on startup in EA App
+- Disable launch on startup for Radmin VPN in Task Manager
+- Disable launch on startup for Brave Software Update in Task Manager
 
 ## Install NVIDIA App
 
