@@ -79,8 +79,6 @@ winget install Microsoft.VisualStudioCode
 ## Install Software via WinGet
 
 ```powershell
-winget install wez.wezterm
-
 winget install Brave.Brave
 winget install Mozilla.Firefox
 
@@ -156,6 +154,14 @@ winget install Valve.Steam
 - Download "Hack Nerd Font" from:
   https://www.nerdfonts.com/font-downloads
 - Install "Hack Nerd Font".
+
+## WezTerm
+
+- Install via Winget:
+  ```powershell
+  winget install wez.wezterm
+  ```
+- Copy WezTerm config to `$XDG_CONFIG_HOME/wezterm`.
 
 ## Games
 

@@ -38,7 +38,7 @@ local config = wezterm.config_builder()
 -- +------------+
 
 -- Removes the title bar, leaving only the tab bar.
-config.window_decorations = 'NONE'
+config.window_decorations = 'RESIZE'
 
 config.window_frame = {
   font = wezterm.font({ family = 'Hack Nerd Font', weight = 'Bold' }),
@@ -240,6 +240,33 @@ config.key_tables = {
   },
 }
 
+-- +----------------+
+-- | Mouse Bindings |
+-- +----------------+
+
+config.mouse_bindings = {
+  -- Change the default selection behavior so that it only selects text,
+  -- but doesn't copy it to a clipboard or open hyperlinks.
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'NONE',
+    action = wezterm.action { ExtendSelectionToMouseCursor = 'Cell' },
+  },
+  -- Don't automatically copy the selection to the clipboard
+  -- when double clicking a word
+  {
+    event = { Up = { streak = 2, button = 'Left' } },
+    mods = 'NONE',
+    action = 'Nop',
+  },
+  -- CTRL+Click will open the link under the mouse cursor
+  {
+    event = { Up = { streak = 1, button = 'Left' } },
+    mods = 'CTRL',
+    action = 'OpenLinkAtMouseCursor',
+  },
+}
+
 -- +------------+
 -- | Status Bar |
 -- +------------+
@@ -279,6 +306,27 @@ wezterm.on('update-status', function(window, pane)
 
   window:set_right_status(wezterm.format(status_elements))
 end)
+
+-- +------------------+
+-- | Windows-Specific |
+-- +------------------+
+
+config.launch_menu = {}
+
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  table.insert(config.launch_menu, {
+    label = 'PowerShell',
+    args = { 'pwsh.exe' },
+  })
+  table.insert(config.launch_menu, {
+    label = 'Git Bash',
+    args = { 'pwsh.exe', '-c', '&(Join-Path (Split-Path (Split-Path (Get-Command git).Source)) "bin/bash.exe")', '-l' },
+  })
+  -- table.insert(config.launch_menu, {
+  --   label = 'PowerShell (Legacy)',
+  --   args = { 'powershell.exe' },
+  -- })
+end
 
 -- +------+
 -- | Misc |
