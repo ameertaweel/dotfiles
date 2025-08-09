@@ -38,7 +38,7 @@ local config = wezterm.config_builder()
 -- +------------+
 
 -- Removes the title bar, leaving only the tab bar.
-config.window_decorations = 'RESIZE'
+config.window_decorations = 'NONE'
 
 config.window_frame = {
   font = wezterm.font({ family = 'Hack Nerd Font', weight = 'Bold' }),
@@ -307,13 +307,24 @@ wezterm.on('update-status', function(window, pane)
   window:set_right_status(wezterm.format(status_elements))
 end)
 
+-- +------+
+-- | Misc |
+-- +------+
+
+-- Workaround for this issue:
+-- https://github.com/wezterm/wezterm/issues/3726
+config.enable_wayland = false
+
+config.launch_menu = {}
+
 -- +------------------+
 -- | Windows-Specific |
 -- +------------------+
 
-config.launch_menu = {}
-
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  -- 'NONE' causes problems with resizing on Windows
+  config.window_decorations = 'RESIZE'
+
   table.insert(config.launch_menu, {
     label = 'PowerShell',
     args = { 'pwsh.exe' },
@@ -327,14 +338,6 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   --   args = { 'powershell.exe' },
   -- })
 end
-
--- +------+
--- | Misc |
--- +------+
-
--- Workaround for this issue:
--- https://github.com/wezterm/wezterm/issues/3726
-config.enable_wayland = false
 
 -- +-------------------------------+
 -- | Return Config To Be Evaluated |
