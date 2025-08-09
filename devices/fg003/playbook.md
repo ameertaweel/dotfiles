@@ -146,6 +146,17 @@ winget install Valve.Steam
 
 - Map "Caps Lock" to "Control (Left)"
 
+### Environment Variables
+
+- Set `HOME` to `%USERPROFILE%`.
+- Set `XDG_CONFIG_HOME` to `%HOME%\.config`.
+
+## Fonts
+
+- Download "Hack Nerd Font" from:
+  https://www.nerdfonts.com/font-downloads
+- Install "Hack Nerd Font".
+
 ## Games
 
 ### Need for Speed: Most Wanted (2005)
