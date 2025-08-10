@@ -163,6 +163,14 @@ winget install Valve.Steam
   ```
 - Copy WezTerm config to `$XDG_CONFIG_HOME/wezterm`.
 
+### WezTerm SSH
+
+- Create a Desktop shortcut for WezTerm.
+- Right-click on the shortcut.
+- From the menu, choose "Properties"
+- Modify the "Target" to become:
+  `"C:\Program Files\WezTerm\wezterm-gui.exe" ssh $USERNAME@$REMOTENAME`
+
 ## Games
 
 ### Need for Speed: Most Wanted (2005)
