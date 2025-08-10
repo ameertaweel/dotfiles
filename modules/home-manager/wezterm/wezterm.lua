@@ -325,13 +325,22 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- 'NONE' causes problems with resizing on Windows
   config.window_decorations = 'RESIZE'
 
+  local powershell = { 'pwsh.exe' }
+  local git_bash = { 'pwsh.exe', '-c', '&(Join-Path (Split-Path (Split-Path (Get-Command git).Source)) "bin/bash.exe")', '-l' }
+  local cmd = { 'cmd.exe' }
+
+  config.default_prog = powershell
   table.insert(config.launch_menu, {
     label = 'PowerShell',
-    args = { 'pwsh.exe' },
+    args = powershell,
   })
   table.insert(config.launch_menu, {
     label = 'Git Bash',
-    args = { 'pwsh.exe', '-c', '&(Join-Path (Split-Path (Split-Path (Get-Command git).Source)) "bin/bash.exe")', '-l' },
+    args = git_bash,
+  })
+  table.insert(config.launch_menu, {
+    label = 'CMD',
+    args = cmd,
   })
   -- table.insert(config.launch_menu, {
   --   label = 'PowerShell (Legacy)',
