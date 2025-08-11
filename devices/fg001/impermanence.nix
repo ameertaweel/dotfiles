@@ -67,7 +67,6 @@
 
     users.labmem001 = {
       directories = [
-        "anime"
         "downloads"
         "pictures"
         "virtual-machines"
