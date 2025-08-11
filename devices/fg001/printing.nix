@@ -6,5 +6,5 @@
   # Enable CUPS Printing Service
   services.printing.enable = true;
   # Enable HP Proprietary Driver
-  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+  services.printing.drivers = [pkgs.hplipWithPlugin];
 }
