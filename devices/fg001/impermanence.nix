@@ -51,6 +51,7 @@
         "workspace"
         ".local/share/zoxide"
         ".local/share/fish"
+        ".thunderbird"
       ];
       files = [
         ".config/nushell/history.sqlite3"
