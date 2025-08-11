@@ -39,7 +39,7 @@
       system = "x86_64-linux";
       state-version = "24.05";
       editor = "nvim";
-      browser = "brave";
+      browser = "firefox";
       langs = ["us" "ara" "tr" "il"];
       timezone = "Asia/Jerusalem";
       # timezone = "Asia/Istanbul";
