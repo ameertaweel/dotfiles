@@ -39,6 +39,7 @@
         ".emacs.d"
         "knowledge-base"
         ".config/BraveSoftware/Brave-Browser"
+        ".mozilla/firefox"
         {
           directory = ".ssh";
           mode = "0700";
