@@ -333,14 +333,17 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   table.insert(config.launch_menu, {
     label = 'PowerShell',
     args = powershell,
+    domain = { DomainName = 'local' },
   })
   table.insert(config.launch_menu, {
     label = 'Git Bash',
     args = git_bash,
+    domain = { DomainName = 'local' },
   })
   table.insert(config.launch_menu, {
     label = 'CMD',
     args = cmd,
+    domain = { DomainName = 'local' },
   })
   -- table.insert(config.launch_menu, {
   --   label = 'PowerShell (Legacy)',
