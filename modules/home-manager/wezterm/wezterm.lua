@@ -348,6 +348,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   -- table.insert(config.launch_menu, {
   --   label = 'PowerShell (Legacy)',
   --   args = { 'powershell.exe' },
+  --   domain = { DomainName = 'local' },
   -- })
 end
 
