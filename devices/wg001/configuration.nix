@@ -35,6 +35,8 @@
     source "${pkgs.wezterm}/etc/profile.d/wezterm.sh"
   '';
 
+  environment.variables.EDITOR = "vim";
+
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
