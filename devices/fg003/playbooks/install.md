@@ -123,6 +123,12 @@ winget install Valve.Steam
   https://support.hp.com/us-en/help/hp-support-assistant
 - Install available updates.
 
+## Install HP PC Hardware Diagnostic Tools
+
+- Download executable from:
+  https://support.hp.com/nz-en/help/hp-pc-hardware-diagnostics
+- Run quick tests.
+
 ## Microsoft PowerToys
 
 - Install via WinGet:
