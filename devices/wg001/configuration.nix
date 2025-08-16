@@ -24,6 +24,8 @@
   users.users.${config.wsl.defaultUser}.packages = [
     pkgs.git
     pkgs.vim
+    pkgs.ripgrep
+    pkgs.fd
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
       "ideavim"
     ])
