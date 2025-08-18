@@ -95,6 +95,8 @@ winget install Telegram.TelegramDesktop
 winget install Discord.Discord
 
 winget install Valve.Steam
+
+winget install Terminals.Terminals # Remote Desktop Client
 ```
 
 ## Default Apps
