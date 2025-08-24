@@ -14,6 +14,7 @@
     <nixos-wsl/modules>
 
     ./nix.nix
+    ./docker.nix
   ];
 
   wsl.enable = true;
@@ -30,6 +31,7 @@
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
       "ideavim"
     ])
+    pkgs.lazydocker
   ];
 
   programs.direnv.enable = true;
