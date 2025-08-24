@@ -26,6 +26,7 @@
     pkgs.vim
     pkgs.ripgrep
     pkgs.fd
+    pkgs.tree
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
       "ideavim"
     ])
