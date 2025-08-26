@@ -151,6 +151,7 @@ winget install Terminals.Terminals # Remote Desktop Client
 ### Keybindings
 
 - Map "Caps Lock" to "Control (Left)"
+- Map "Win (Left) + Tab" to "Alt (Left) + Tab"
 
 ### Environment Variables
 
