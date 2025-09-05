@@ -54,14 +54,176 @@
   (setq org-hide-emphasis-markers t)
   ; Code that runs after the package is loaded
   :config
-  (setq org-log-into-drawer "LOGBOOK"))
+  (setq org-log-into-drawer "LOGBOOK")
+  (setq org-todo-keywords
+        '((sequenc
+           "TODO(t!)"
+           "PLNG(p!)" ; Planning Currently
+           "FPLN(f!)" ; Planning Finished
+           "WRKN(w!)" ; Working Currently (In-Progress)
+           "HOLD(h!)" ; On-Hold
+           "|"
+           "DONE(d!)"
+           "KILL(k!)")))
+  (setq org-log-reschedule 'time)
+  (setq org-log-redeadline 'time)
+  (setq org-agenda-custom-commands
+        '(("t" "Today's Agenda" agenda ""
+           ((org-agenda-span 1)
+            (org-agenda-start-day "0d")
+            (org-agenda-start-on-weekday nil)))
+          ("3" "Yesterday, Today, and Tomorrow" agenda ""
+           ((org-agenda-span 3)
+            (org-agenda-start-day "-1d")
+            (org-agenda-start-on-weekday nil)))
+          ("w" "Week's Agenda" agenda "" ((org-agenda-span 7)
+                                          (org-agenda-start-day "-3d")
+                                          (org-agenda-start-on-weekday nil)))
+          ("e" "Eventual TODOs" alltodo "" ((org-agenda-skip-function '(or (kyouma/org-skip-subtree-if-habit)
+                                                                           (org-agenda-skip-if nil '(scheduled deadline))))))
+          ("a" "All TODOs" alltodo ""))))
+
+(defun kyouma/org-skip-subtree-if-habit ()
+  "Skip an agenda entry if it has a STYLE property equal to \"habit\".
+
+Based On:
+https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html"
+  (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+    (if (string= (org-entry-get nil "STYLE") "habit")
+        subtree-end
+      nil)))
 
 (defun kyouma/search-roam ()
  "Run consult-ripgrep on the org roam directory"
  (interactive)
  (consult-ripgrep org-roam-directory nil))
 
+(defun kyouma/get-random-uuid ()
+  "Generate a UUID.
+This commands calls `uuidgen` on MacOS, Linux, and calls PowelShell on Microsoft
+Windows.
+
+Based On:
+URL `http://xahlee.info/emacs/emacs/elisp_generate_uuid.html`"
+  (string-trim
+   (cond
+    ((eq system-type 'windows-nt)
+     (shell-command-to-string "pwsh.exe -Command [guid]::NewGuid().toString()"))
+    ((eq system-type 'darwin) ; Mac
+     (shell-command-to-string "uuidgen"))
+    ((eq system-type 'gnu/linux)
+     (shell-command-to-string "uuidgen"))
+    (t
+     ;; Code here by Christopher Wellons, 2011-11-18.
+     ;; Editted further by Hideki Saito to generate all valid variants for "N" in
+     ;; xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx format.
+     (let ((xstr (md5 (format "%s%s%s%s%s%s%s%s%s%s"
+                              (user-uid)
+                              (emacs-pid)
+                              (system-name)
+                              (user-full-name)
+                              (current-time)
+                              (emacs-uptime)
+                              (garbage-collect)
+                              (buffer-string)
+                              (random)
+                              (recent-keys)))))
+       (format "%s-%s-4%s-%s%s-%s"
+               (substring xstr 0 8)
+               (substring xstr 8 12)
+               (substring xstr 13 16)
+               (format "%x" (+ 8 (random 4)))
+               (substring xstr 17 20)
+               (substring xstr 20 32)))))))
+
+(defun kyouma/org-generate-unique-custom-id ()
+  "Generate a unique custom ID for Org mode heading."
+  (interactive)
+  (org-set-property "CUSTOM_ID" (kyouma/get-random-uuid)))
+
+(defun kyouma/org-global-custom-ids ()
+  "Find custom ID fields in all Org agenda files.
+
+Based On:
+https://blog.aaronbieber.com/2016/07/31/org-navigation-revisited.html"
+  (let ((files (org-agenda-files))
+        file
+        kyouma/all-org-custom-ids)
+    (while (setq file (pop files))
+      (with-current-buffer (org-get-agenda-file-buffer file)
+        (save-excursion
+          (save-restriction
+            (widen)
+            (goto-char (point-min))
+            (while (re-search-forward "^[ \t]*:CUSTOM_ID:[ \t]+\\(\\S-+\\)[ \t]*$"
+                                      nil t)
+              (let ((custom-id (match-string-no-properties 1)))
+                (add-to-list 'kyouma/all-org-custom-ids
+                             `(,(concat custom-id " :: " (org-entry-get nil "ITEM"))
+                               ,(concat file ":" (number-to-string (line-number-at-pos)))))))))))
+    kyouma/all-org-custom-ids))
+
+(defun kyouma/org-goto-custom-id ()
+  "Go to the location of a custom ID, selected interactively.
+
+Based On:
+https://blog.aaronbieber.com/2016/07/31/org-navigation-revisited.html"
+  (interactive)
+  (let* ((all-custom-ids (kyouma/org-global-custom-ids))
+         (custom-id (completing-read
+                     "Custom ID: "
+                     all-custom-ids)))
+    (when custom-id
+      (let* ((val (cadr (assoc custom-id all-custom-ids)))
+             (id-parts (split-string val ":"))
+             (file (car id-parts))
+             (line (string-to-number (cadr id-parts))))
+        (pop-to-buffer-same-window (org-get-agenda-file-buffer file))
+        (goto-char (point-min))
+        (forward-line line)
+        (org-up-element)
+        (org-reveal t)
+        (org-fold-show-subtree)))))
+
+(defun kyouma/org-insert-custom-id-link ()
+  "Insert an Org link to a custom ID selected interactively.
+
+Based On:
+https://blog.aaronbieber.com/2016/07/31/org-navigation-revisited.html"
+  (interactive)
+  (let* ((all-custom-ids (kyouma/org-global-custom-ids))
+         (selection (completing-read
+                     "Custom ID: "
+                     all-custom-ids))
+         (selection-parts (split-string selection " :: "))
+         (custom-id (car selection-parts))
+         (heading (mapconcat 'identity (cdr selection-parts) " :: ")))
+    (when custom-id
+      (org-insert-link nil (concat "custom:" custom-id) heading))))
+
+; Register Custom Link Prefix.
+;
+; Based On:
+; https://christiantietze.de/posts/2021/02/emacs-org-mode-zettel-link
+(org-link-set-parameters
+ "custom"
+ :follow (lambda (searchterm)
+           (let* ((all-custom-ids (kyouma/org-global-custom-ids))
+                  (custom-ids (mapcar (lambda (x) (cons (car (split-string (car x) " :: ")) (cadr x))) all-custom-ids))
+                  (fileline (cdr (assoc searchterm custom-ids)))
+                  (file-parts (split-string fileline ":"))
+                  (file (car file-parts))
+                  (line (string-to-number (cadr file-parts))))
+             (pop-to-buffer-same-window (org-get-agenda-file-buffer file))
+             (goto-char (point-min))
+             (forward-line line)
+             (org-up-element))))
+
 (map! :leader "n r S" 'kyouma/search-roam)
+(map! :leader "n r c" 'kyouma/org-goto-custom-id)
+(map! :leader "n r l" 'kyouma/org-insert-custom-id-link)
+(map! :after org
+      :map org-mode-map :localleader "l c" 'kyouma/org-generate-unique-custom-id)
 
 (use-package! org-habit
   :after org
