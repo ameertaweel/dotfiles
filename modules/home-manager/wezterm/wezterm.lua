@@ -204,6 +204,12 @@ config.keys = {
     mods = 'LEADER|CTRL',
     action = wezterm.action.ClearScrollback 'ScrollbackAndViewport',
   },
+  -- Avoid Emacs showing weird symbols when pressing SHIFT+SPACE
+  {
+    key = ' ',
+    mods = 'SHIFT',
+    action = wezterm.action.SendString(' ')
+  },
 }
 
 local function kb_activate_tab(key, tab)
