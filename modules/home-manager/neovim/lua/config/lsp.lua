@@ -1,20 +1,18 @@
 -- Configure Language Servers
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
-local lspconfig = require('lspconfig')
-local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-lspconfig.nil_ls.setup       { capabilities = capabilities }
-lspconfig.ccls.setup         { capabilities = capabilities }
-lspconfig.superhtml.setup    { capabilities = capabilities }
-lspconfig.cssls.setup        { capabilities = capabilities }
-lspconfig.jsonls.setup       { capabilities = capabilities }
-lspconfig.ts_ls.setup        { capabilities = capabilities }
-lspconfig.svelte.setup       { capabilities = capabilities }
-lspconfig.basedpyright.setup { capabilities = capabilities }
-lspconfig.yamlls.setup       { capabilities = capabilities }
+vim.lsp.enable('nil_ls')
+vim.lsp.enable('ccls')
+vim.lsp.enable('superhtml')
+vim.lsp.enable('cssls')
+vim.lsp.enable('jsonls')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('svelte')
+vim.lsp.enable('basedpyright')
+vim.lsp.enable('yamlls')
 
-lspconfig.lua_ls.setup { capabilities = capabilities }
+vim.lsp.enable('lua_ls')
 require('lazydev').setup {
    library = {
       -- Load luvit types when the `vim.uv` word is found
