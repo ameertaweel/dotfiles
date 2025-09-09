@@ -22,6 +22,10 @@
 
     # Nix Base-16 Theming
     nix-colors.url = "github:misterio77/nix-colors";
+
+    # Nix VSCode Extensions
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
