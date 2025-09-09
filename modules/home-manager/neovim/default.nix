@@ -170,6 +170,10 @@ in {
       # Auto Close and Auto Rename HTML Tag
       # https://github.com/windwp/nvim-ts-autotag
       nvim-ts-autotag
+
+      # Break Bad Habits, Master Vim Motions
+      hardtime-nvim
+      nui-nvim
     ];
     extraPackages = with pkgs; [
       # Wayland Clipboard Provider

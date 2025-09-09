@@ -78,3 +78,7 @@ wk.add({
    noremap = true,
    desc = 'open parent directory in file explorer'
 })
+
+-- Break Bad Habits, Master Vim Motions
+
+require('hardtime').setup()
