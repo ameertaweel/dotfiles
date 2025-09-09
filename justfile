@@ -1,14 +1,14 @@
 fg001-build:
   cd {{justfile_directory()}}
-  nixos-rebuild --flake ./devices/fg001#fg001 build
+  nixos-rebuild --flake "{{justfile_directory()}}/devices/fg001#fg001" build
 
 fg001-boot:
   cd {{justfile_directory()}}
-  sudo nixos-rebuild --flake ./devices/fg001#fg001 boot && nixos-rebuild-summary
+  sudo nixos-rebuild --flake "{{justfile_directory()}}/devices/fg001#fg001" boot && nixos-rebuild-summary
 
 fg001-switch:
   cd {{justfile_directory()}}
-  sudo nixos-rebuild --flake ./devices/fg001#fg001 switch && nixos-rebuild-summary
+  sudo nixos-rebuild --flake "{{justfile_directory()}}/devices/fg001#fg001" switch && nixos-rebuild-summary
 
 vg001-build:
   cd {{justfile_directory()}}
