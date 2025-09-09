@@ -5,6 +5,7 @@
     nativeBuildInputs = with pkgs; [
       just
       nixos-rebuild-summary
+      nixos-anywhere
     ];
   };
   full = pkgs.mkShell {
