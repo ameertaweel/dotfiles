@@ -10,6 +10,10 @@
     # Nix Index Database
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Home Manager
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -23,6 +27,7 @@
       username = "nixos";
       system = "x86_64-linux";
       state-version = "24.11";
+      editor = "vim";
     };
   in {
     # NixOS configuration entrypoint
@@ -33,6 +38,16 @@
       modules = [
         ./wsl.nix
         ./configuration.nix
+
+        {
+          imports = [
+            inputs.home-manager.nixosModules.home-manager
+          ];
+          # home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.${params.username} = import ./home.nix;
+          home-manager.extraSpecialArgs = {inherit inputs outputs params;};
+        }
       ];
     };
   };
