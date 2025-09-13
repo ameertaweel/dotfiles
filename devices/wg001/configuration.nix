@@ -5,7 +5,7 @@
 }: {
   imports = [
     ../../modules/nixos/nix.nix
-    ./docker.nix
+    ../../modules/nixos/virtualization/docker.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
