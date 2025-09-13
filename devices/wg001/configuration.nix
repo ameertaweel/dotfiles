@@ -19,6 +19,8 @@
     shell = pkgs.bash;
   };
 
+  networking.hostName = params.hostname;
+
   programs.direnv.enable = true;
 
   programs.bash.interactiveShellInit = ''
