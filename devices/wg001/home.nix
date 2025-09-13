@@ -25,5 +25,6 @@
   imports = [
     ../../modules/home-manager/vim
     ../../modules/home-manager/xdg.nix
+    ../../modules/home-manager/jetbrains/pycharm-professional.nix
   ];
 }

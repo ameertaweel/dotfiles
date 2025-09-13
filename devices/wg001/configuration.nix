@@ -8,17 +8,12 @@
     ../../modules/nixos/virtualization/docker.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   users.users.${params.username} = {
     packages = [
       pkgs.git
       pkgs.ripgrep
       pkgs.fd
       pkgs.tree
-      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
-        "ideavim"
-      ])
       pkgs.lazydocker
     ];
     shell = pkgs.bash;
