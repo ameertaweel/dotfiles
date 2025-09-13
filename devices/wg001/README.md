@@ -8,4 +8,5 @@
 - Run PowerShell script: `.\create-nixos-wsl-distro.ps1 -DistroName nixos -NoRedownload`
 - Enter WSL distro: `wsl -d nixos`
 - Clone this repository to your home directory.
-- `sudo nixos-rebuild switch -I nixos-config="${HOME}/dotfiles/devices/wg001/configuration.nix"`
+- `cd ${HOME}/dotfiles/devices/wg001`
+- `sudo nixos-rebuild --flake .#wg001 switch`
