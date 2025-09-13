@@ -2,7 +2,7 @@
   params,
   ...
 }: {
-  # TODO: Import From `../../modules/home-manager/core.nix`
+  # TODO: Import From `../../modules/home-manager/core.nix` [START]
 
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -18,7 +18,12 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = params.state-version;
 
+  # TODO: Import From `../../modules/home-manager/core.nix` [END]
+
+  programs.bash.enable = true;
+
   imports = [
     ../../modules/home-manager/vim
+    ../../modules/home-manager/xdg.nix
   ];
 }

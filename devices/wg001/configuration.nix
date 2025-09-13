@@ -10,25 +10,25 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  users.users.${params.username}.packages = [
-    pkgs.git
-    pkgs.vim
-    pkgs.ripgrep
-    pkgs.fd
-    pkgs.tree
-    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
-      "ideavim"
-    ])
-    pkgs.lazydocker
-  ];
+  users.users.${params.username} = {
+    packages = [
+      pkgs.git
+      pkgs.ripgrep
+      pkgs.fd
+      pkgs.tree
+      (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.pycharm-professional [
+        "ideavim"
+      ])
+      pkgs.lazydocker
+    ];
+    shell = pkgs.bash;
+  };
 
   programs.direnv.enable = true;
 
   programs.bash.interactiveShellInit = ''
     source "${pkgs.wezterm}/etc/profile.d/wezterm.sh"
   '';
-
-  environment.variables.EDITOR = "vim";
 
   services.mysql = {
     enable = true;
