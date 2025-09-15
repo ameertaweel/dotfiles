@@ -5,12 +5,20 @@
   environmentFile,
   ...
 }: {config, ...}: {
-  ##################
-  # Service Config #
-  ##################
+  assertions = let
+    versionExpected = version;
+    versionActual = config.services.miniflux.package.version;
+  in [{
+    assertion = versionActual == versionExpected;
+    message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
+  }];
+
+  ##############################################################################
+  # Service Configuration                                                      #
+  ##############################################################################
 
   services.miniflux = {
-    enable = assert config.services.miniflux.package.version == version; true;
+    enable = true;
     config = {
       BASE_URL = baseURL;
       LISTEN_ADDR = "localhost:${builtins.toString port}";
@@ -30,18 +38,18 @@
     adminCredentialsFile = environmentFile;
   };
 
-  ########################
-  # Reverse Proxy Config #
-  ########################
+  ##############################################################################
+  # Reverse Proxy Configuration                                                #
+  ##############################################################################
 
   services.caddy.virtualHosts."miniflux.ts.taweel.me".extraConfig = ''
     import acme_dns_01_porkbun
     reverse_proxy http://localhost:${builtins.toString port}
   '';
 
-  ###################
-  # Periodic Backup #
-  ###################
+  ##############################################################################
+  # Periodic Backup                                                            #
+  ##############################################################################
 
   services.postgresqlBackup.databases = ["miniflux"];
 }

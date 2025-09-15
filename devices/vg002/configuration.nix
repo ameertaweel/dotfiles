@@ -44,6 +44,9 @@
       inherit (params.miniflux) baseURL port version;
       environmentFile = params.secrets.minifluxEnvFile;
     };
+    stirlingPDF = import ./stirling-pdf.nix {
+      inherit (params.stirlingPDF) port version;
+    };
   };
 
   commonImports = [
@@ -64,11 +67,15 @@
       modules.postgresBackup
       modules.caddy
       modules.miniflux
+      modules.stirlingPDF
       modules.tailscale
     ]
     else [];
 in {
   imports = commonImports ++ postInstallImports;
+  nix.settings = {
+    download-buffer-size = 4 * 524288000; # 500 MiB
+  };
   environment.systemPackages = map lib.lowPrio [
     pkgs.vim
     pkgs.curl
