@@ -1,17 +1,19 @@
 {
   username,
-  hashedPassword,
+  userHashedPassword,
+  rootHashedPassword,
   sshKey,
 }: {...}: {
-  users.groups.${username} = {};
   users.users.${username} = {
     description = "Main User";
     isNormalUser = true;
-    group = username;
     extraGroups = ["wheel"];
-    hashedPassword = hashedPassword;
+    hashedPassword = userHashedPassword;
     openssh.authorizedKeys.keys = [sshKey];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = [sshKey];
+  users.users.root = {
+    hashedPassword = rootHashedPassword;
+    openssh.authorizedKeys.keys = [sshKey];
+  };
 }

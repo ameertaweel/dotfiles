@@ -20,7 +20,7 @@ in
 
     services.openssh = {
       enable = true;
-      allowSFTP = false; # Don't set this if you need sftp
+      allowSFTP = true; # Don't set this if you need sftp
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
