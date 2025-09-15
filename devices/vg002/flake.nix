@@ -33,5 +33,7 @@
         ./configuration.nix
       ];
     };
+
+    lib = import ./lib.nix;
   };
 }
