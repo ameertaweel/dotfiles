@@ -1,6 +1,7 @@
 {
   persistDirBackup,
   persistDirNoBackup,
+  secretsDir,
   ...
 }: {inputs, ...}: {
   imports = [
@@ -17,6 +18,7 @@
       # We need to be able to look at logs and coredumps even after reboot
       "/var/log"
       "/var/lib/systemd/coredump"
+      secretsDir
     ];
   };
 
