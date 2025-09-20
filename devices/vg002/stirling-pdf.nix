@@ -1,15 +1,18 @@
 {
   port,
   version,
+  domain,
   ...
 }: {config, ...}: {
   assertions = let
     versionExpected = version;
     versionActual = config.services.stirling-pdf.package.version;
-  in [{
-    assertion = versionActual == versionExpected;
-    message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
-  }];
+  in [
+    {
+      assertion = versionActual == versionExpected;
+      message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
+    }
+  ];
 
   ##############################################################################
   # Service Configuration                                                      #
@@ -30,7 +33,7 @@
   # Reverse Proxy Configuration                                                #
   ##############################################################################
 
-  services.caddy.virtualHosts."stirling-pdf.ts.taweel.me".extraConfig = ''
+  services.caddy.virtualHosts.${domain}.extraConfig = ''
     import acme_dns_01_porkbun
     reverse_proxy http://localhost:${builtins.toString port}
   '';

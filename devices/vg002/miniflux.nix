@@ -1,5 +1,5 @@
 {
-  baseURL,
+  domain,
   port,
   version,
   environmentFile,
@@ -8,10 +8,12 @@
   assertions = let
     versionExpected = version;
     versionActual = config.services.miniflux.package.version;
-  in [{
-    assertion = versionActual == versionExpected;
-    message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
-  }];
+  in [
+    {
+      assertion = versionActual == versionExpected;
+      message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
+    }
+  ];
 
   ##############################################################################
   # Service Configuration                                                      #
@@ -20,7 +22,7 @@
   services.miniflux = {
     enable = true;
     config = {
-      BASE_URL = baseURL;
+      BASE_URL = "https://${domain}";
       LISTEN_ADDR = "localhost:${builtins.toString port}";
 
       # Do not automatically create an admin account
@@ -42,7 +44,7 @@
   # Reverse Proxy Configuration                                                #
   ##############################################################################
 
-  services.caddy.virtualHosts."miniflux.ts.taweel.me".extraConfig = ''
+  services.caddy.virtualHosts.${domain}.extraConfig = ''
     import acme_dns_01_porkbun
     reverse_proxy http://localhost:${builtins.toString port}
   '';

@@ -41,11 +41,15 @@
       environmentFile = params.secrets.caddyEnvFile;
     };
     miniflux = import ./miniflux.nix {
-      inherit (params.miniflux) baseURL port version;
+      inherit (params.miniflux) domain port version;
       environmentFile = params.secrets.minifluxEnvFile;
     };
+    searxng = import ./searxng.nix {
+      inherit (params.searxng) domain port version;
+      environmentFile = params.secrets.searxngEnvFile;
+    };
     stirlingPDF = import ./stirling-pdf.nix {
-      inherit (params.stirlingPDF) port version;
+      inherit (params.stirlingPDF) domain port version;
     };
   };
 
@@ -67,6 +71,7 @@
       modules.postgresBackup
       modules.caddy
       modules.miniflux
+      modules.searxng
       modules.stirlingPDF
       modules.tailscale
     ]
