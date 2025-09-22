@@ -8,4 +8,13 @@ rec {
     excludeShebang = builtins.tail lines;
   in
     builtins.concatStringsSep "\n" excludeShebang;
+
+  assertPkgVersion = {
+    displayName,
+    versionExpected,
+    versionActual,
+  }: {
+    assertion = versionActual == versionExpected;
+    message = "${displayName} version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
+  };
 }

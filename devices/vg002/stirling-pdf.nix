@@ -3,15 +3,17 @@
   version,
   domain,
   ...
-}: {config, ...}: {
-  assertions = let
-    versionExpected = version;
-    versionActual = config.services.stirling-pdf.package.version;
-  in [
-    {
-      assertion = versionActual == versionExpected;
-      message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
-    }
+}: {
+  config,
+  outputs,
+  ...
+}: {
+  assertions = [
+    (outputs.lib.assertPkgVersion {
+      displayName = "Stirling PDF";
+      versionExpected = version;
+      versionActual = config.services.stirling-pdf.package.version;
+    })
   ];
 
   ##############################################################################

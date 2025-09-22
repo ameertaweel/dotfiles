@@ -4,15 +4,17 @@
   version,
   environmentFile,
   ...
-}: {config, ...}: {
-  assertions = let
-    versionExpected = version;
-    versionActual = config.services.miniflux.package.version;
-  in [
-    {
-      assertion = versionActual == versionExpected;
-      message = "Miniflux version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
-    }
+}: {
+  config,
+  outputs,
+  ...
+}: {
+  assertions = [
+    (outputs.lib.assertPkgVersion {
+      displayName = "Miniflux";
+      versionExpected = version;
+      versionActual = config.services.miniflux.package.version;
+    })
   ];
 
   ##############################################################################

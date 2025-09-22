@@ -4,15 +4,17 @@
   version,
   environmentFile,
   ...
-}: {config, ...}: {
-  assertions = let
-    versionExpected = version;
-    versionActual = config.services.searx.package.version;
-  in [
-    {
-      assertion = versionActual == versionExpected;
-      message = "SearXNG version mismatch. Expected `${versionExpected}`. Found `${versionActual}`.";
-    }
+}: {
+  config,
+  outputs,
+  ...
+}: {
+  assertions = [
+    (outputs.lib.assertPkgVersion {
+      displayName = "SearXNG";
+      versionExpected = version;
+      versionActual = config.services.searx.package.version;
+    })
   ];
 
   ##############################################################################

@@ -40,6 +40,11 @@
       persistDirData = params.persistDirNoBackup;
       environmentFile = params.secrets.caddyEnvFile;
     };
+    ntfy = import ./ntfy.nix {
+      inherit (params.ntfy) domain port version;
+      persistDir = params.persistDirNoBackup;
+      environmentFile = params.secrets.ntfyEnvFile;
+    };
     miniflux = import ./miniflux.nix {
       inherit (params.miniflux) domain port version;
       environmentFile = params.secrets.minifluxEnvFile;
@@ -70,6 +75,7 @@
       modules.postgres
       modules.postgresBackup
       modules.caddy
+      modules.ntfy
       modules.miniflux
       modules.searxng
       modules.stirlingPDF
