@@ -36,6 +36,7 @@
     users.labmem001 = {
       directories = [
         "dotfiles"
+        "secrets"
         ".emacs.d"
         "knowledge-base"
         ".config/BraveSoftware/Brave-Browser"
@@ -54,7 +55,6 @@
         ".thunderbird"
       ];
       files = [
-        ".config/nushell/history.sqlite3"
       ];
     };
   };

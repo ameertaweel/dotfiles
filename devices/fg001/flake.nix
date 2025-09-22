@@ -46,8 +46,7 @@
       browser = "firefox";
       langs = ["us" "ara" "tr" "il"];
       timezone = "Asia/Jerusalem";
-      # timezone = "Asia/Istanbul";
-      shell = "nushell";
+      shell = "fish";
       terminal = "kitty";
       theme = "ayu-dark";
       pdf-reader = "zathura";
