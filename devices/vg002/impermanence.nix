@@ -43,6 +43,21 @@
     ];
   };
 
+  # Fix permission issue on /var/lib/private
+  # https://github.com/nix-community/impermanence/issues/254#issuecomment-2683859091
+  system.activationScripts."createPersistentStorageDirs".deps = ["var-lib-private-permissions" "users" "groups"];
+  system.activationScripts = {
+    "var-lib-private-permissions" = {
+      deps = ["specialfs"];
+      text = ''
+        mkdir -p ${persistDirBackup}/var/lib/private
+        mkdir -p ${persistDirNoBackup}/var/lib/private
+        chmod 0700 ${persistDirBackup}/var/lib/private
+        chmod 0700 ${persistDirNoBackup}/var/lib/private
+      '';
+    };
+  };
+
   # Never show the sudo lecture
   security.sudo.extraConfig = ''
     Defaults lecture = never

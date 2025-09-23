@@ -53,6 +53,11 @@
       inherit (params.searxng) domain port version;
       environmentFile = params.secrets.searxngEnvFile;
     };
+    scrutiny = import ./scrutiny.nix {
+      inherit (params.scrutiny) domain port influxDB2Port version;
+      persistDir = params.persistDirNoBackup;
+      environmentFile = params.secrets.scrutinyEnvFile;
+    };
     stirlingPDF = import ./stirling-pdf.nix {
       inherit (params.stirlingPDF) domain port version;
     };
@@ -78,6 +83,7 @@
       modules.ntfy
       modules.miniflux
       modules.searxng
+      modules.scrutiny
       modules.stirlingPDF
       modules.tailscale
     ]

@@ -1,6 +1,7 @@
 {
   domain,
   port,
+  influxDB2Port,
   version,
   environmentFile,
   persistDir ? null,
@@ -11,13 +12,14 @@
   outputs,
   ...
 }: let
-  baseDir = "/var/lib/ntfy-sh";
+  baseDir = "/var/lib/private/scrutiny";
+  influxDB2BaseDir = "/var/lib/influxdb2";
 in {
   assertions = [
     (outputs.lib.assertPkgVersion {
-      displayName = "Ntfy";
+      displayName = "Scrutiny";
       versionExpected = version;
-      versionActual = config.services.ntfy-sh.package.version;
+      versionActual = config.services.scrutiny.package.version;
     })
   ];
 
@@ -25,23 +27,28 @@ in {
   # Service Configuration                                                      #
   ##############################################################################
 
-  services.ntfy-sh = {
+  services.scrutiny = {
     enable = true;
-    inherit environmentFile;
-    settings = {
-      base-url = "https://${domain}";
-      listen-http = "localhost:${builtins.toString port}";
-      behind-proxy = true;
-      cache-file = "${baseDir}/cache.db";
-      cache-duration = "24h";
-      attachment-cache-dir = "${baseDir}/attachments";
-      attachment-total-size-limit = "5G";
-      attachment-file-size-limit = "15M";
-      attachment-expiry-duration = "24h";
-      auth-file = "${baseDir}/user.db";
-      auth-default-access = "deny-all";
-      enable-login = true;
+    collector.enable = false;
+    influxdb.enable = true;
+    settings.web = {
+      influxdb = {
+        host = "localhost";
+        org = "scrutiny";
+        port = influxDB2Port;
+      };
+      database.location = "${baseDir}/scrutiny.db";
+      listen = {
+        host = "localhost";
+        inherit port;
+      };
     };
+  };
+
+  systemd.services.scrutiny.serviceConfig.EnvironmentFile = environmentFile;
+
+  services.influxdb2.settings = {
+    http-bind-address = "localhost:${builtins.toString influxDB2Port}";
   };
 
   ##############################################################################
@@ -58,6 +65,6 @@ in {
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = [baseDir];
+    ${persistDir}.directories = [baseDir influxDB2BaseDir];
   };
 }

@@ -55,3 +55,10 @@ https://developers.google.com/youtube/v3
 ## Tailscale
 
 login manually with tailscale up
+
+## Scrutiny
+
+InfluxDB2 Docs:
+https://docs.influxdata.com/influxdb/v2/
+Create scrutiny influxdb2 token:
+influx auth create --description "scrutiny token" --read-orgs --org scrutiny --read-buckets --write-buckets --read-tasks --write-tasks --token $ADMIN_TOKEN
