@@ -61,6 +61,9 @@
     stirlingPDF = import ./stirling-pdf.nix {
       inherit (params.stirlingPDF) domain port version;
     };
+    qBittorrent = import ./qbittorrent.nix {
+      inherit (params.qBittorrent) domain port version;
+    };
   };
 
   commonImports = [
@@ -85,6 +88,7 @@
       modules.searxng
       modules.scrutiny
       modules.stirlingPDF
+      modules.qBittorrent
       modules.tailscale
     ]
     else [];
