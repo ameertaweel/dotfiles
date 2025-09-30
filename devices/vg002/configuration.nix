@@ -58,6 +58,10 @@
       persistDir = params.persistDirNoBackup;
       environmentFile = params.secrets.scrutinyEnvFile;
     };
+    iSponsorBlockTV = import ./isponsorblocktv.nix {
+      inherit (params.iSponsorBlockTV) version;
+      persistDir = params.persistDirBackup;
+    };
     stirlingPDF = import ./stirling-pdf.nix {
       inherit (params.stirlingPDF) domain port version;
     };
@@ -87,6 +91,7 @@
       modules.miniflux
       modules.searxng
       modules.scrutiny
+      modules.iSponsorBlockTV
       modules.stirlingPDF
       modules.qBittorrent
       modules.tailscale
