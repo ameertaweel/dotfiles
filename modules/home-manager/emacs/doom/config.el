@@ -200,6 +200,7 @@ https://blog.aaronbieber.com/2016/07/31/org-navigation-revisited.html"
          (custom-id (car selection-parts))
          (heading (mapconcat 'identity (cdr selection-parts) " :: ")))
     (when custom-id
+      (goto-char (+ (point) 1))
       (org-insert-link nil (concat "custom:" custom-id) heading))))
 
 ; Register Custom Link Prefix.
