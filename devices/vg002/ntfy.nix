@@ -11,7 +11,7 @@
   outputs,
   ...
 }: let
-  baseDir = "/var/lib/ntfy-sh";
+  baseDir = "/var/lib/private/ntfy-sh";
 in {
   assertions = [
     (outputs.lib.assertPkgVersion {
