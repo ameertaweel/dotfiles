@@ -53,6 +53,12 @@
       inherit (params.searxng) domain port version;
       environmentFile = params.secrets.searxngEnvFile;
     };
+    davis = import ./davis.nix {
+      inherit (params.davis) domain port version;
+      adminPasswordFile = params.secrets.davisAdminPasswordFile;
+      appSecretFile = params.secrets.davisAppSecretFile;
+      persistDir = params.persistDirBackup;
+    };
     scrutiny = import ./scrutiny.nix {
       inherit (params.scrutiny) domain port influxDB2Port version;
       persistDir = params.persistDirNoBackup;
@@ -90,6 +96,7 @@
       modules.ntfy
       modules.miniflux
       modules.searxng
+      modules.davis
       modules.scrutiny
       modules.iSponsorBlockTV
       modules.stirlingPDF
