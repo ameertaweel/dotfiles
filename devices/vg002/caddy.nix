@@ -18,7 +18,7 @@
 
     package = pkgs.caddy.withPlugins {
       plugins = ["github.com/caddy-dns/porkbun@v0.3.1"];
-      hash = "sha256-PUHu+KPywdJMuPLHPtQhUaw3Cv1pED5XQ1MOzlT/6h4=";
+      hash = "sha256-1UyHT1Nhe1FliL2udRjWC1OGUpOewcKRVT89Q5trVdA=";
     };
 
     inherit environmentFile;
