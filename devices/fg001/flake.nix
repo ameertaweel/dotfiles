@@ -3,7 +3,8 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:geodic/nixpkgs/4f449058eefa05b07f1ddbcf5c62908732ca6503";
 
     # Disko (Declarative Disk Partitioning and Formatting)
     disko.url = "github:nix-community/disko";
