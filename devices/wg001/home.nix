@@ -1,5 +1,6 @@
 {
   params,
+  pkgs,
   ...
 }: {
   # TODO: Import From `../../modules/home-manager/core.nix` [START]
@@ -26,5 +27,9 @@
     ../../modules/home-manager/vim
     ../../modules/home-manager/xdg.nix
     ../../modules/home-manager/jetbrains/pycharm-professional.nix
+  ];
+
+  home.packages = with pkgs; [
+    vscodium
   ];
 }
