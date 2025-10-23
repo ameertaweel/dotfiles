@@ -4,7 +4,7 @@
 
 Perform any available updates.
 
-## Winget
+## WinGet
 
 - List available updates via:
   ```powershell
@@ -14,6 +14,15 @@ Perform any available updates.
   ```powershell
   winget upgrade --all
   ```
+- Force update when WinGet refuses to update:
+  ```powershell
+  winget install --id $PKG_ID -s winget -v $PKG_VERSION --uninstall-previous --force
+  ```
+  Example:
+  ```powershell
+  winget install --id Microsoft.PowerShell -s winget -v 7.5.4.0 --uninstall-previous --force
+  ```
+
 
 ## NVIDIA
 
