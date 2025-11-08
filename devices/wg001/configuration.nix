@@ -15,6 +15,9 @@
       pkgs.fd
       pkgs.tree
       pkgs.lazydocker
+      pkgs.wget
+      pkgs.zip
+      pkgs.jq
     ];
     shell = pkgs.bash;
   };
