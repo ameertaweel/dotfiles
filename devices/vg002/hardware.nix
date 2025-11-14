@@ -18,6 +18,10 @@
     })
   ];
 
+  # Netcup recommends installing `qemu-guest-agent` as it is responsible for a
+  # safe shutdown of the system, among other features utilized by the Netcup SCP.
+  services.qemuGuest.enable = true;
+
   boot.initrd.availableKernelModules = ["xhci_pci" "virtio_pci" "virtio_scsi" "usbhid" "sr_mod"];
 
   boot.kernelModules = [];
