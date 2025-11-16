@@ -17,6 +17,7 @@
       pkgs.lazydocker
       pkgs.wget
       pkgs.zip
+      pkgs.unzip
       pkgs.jq
     ];
     shell = pkgs.bash;
