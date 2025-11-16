@@ -23,8 +23,9 @@
   programs.bash.enable = true;
 
   imports = [
+    ../../modules/home-manager/documents/zathura.nix
+    ../../modules/home-manager/jetbrains/pycharm-professional.nix
     ../../modules/home-manager/vim
     ../../modules/home-manager/xdg.nix
-    ../../modules/home-manager/jetbrains/pycharm-professional.nix
   ];
 }

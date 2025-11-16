@@ -28,6 +28,7 @@
       system = "x86_64-linux";
       state-version = "24.11";
       editor = "vim";
+      pdf-reader = "zathura";
     };
   in {
     # NixOS configuration entrypoint
