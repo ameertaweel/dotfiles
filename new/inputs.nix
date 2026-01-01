@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 let
-  sources = import ./npins;
+  sources = import ./nix/tamal {};
 in
 {
   options = {

@@ -1,0 +1,10 @@
+{"v":"1.0.0"
+,"i":{
+"nixpkgs":{"kd":[1,{"ft":0,"ur":"https://releases.nixos.org/nixos/unstable/nixos-26.05pre971119.8110df5ad7ab/nixexprs.tar.xz","ms":[]}],"ha":{"al":0,"vl":"sha256-D4ely1FsBcvtj/qSrNhSWpq+CUZKNiKwJIxpxnfy9o4="},"fv":"https://releases.nixos.org/nixos/unstable/nixos-26.05pre971119.8110df5ad7ab","ps":[]}
+,"nix-index-database":{"kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-index-database/archive/bc13aeaed568be76eab84df88ff39261bb52ff70.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-89Mh4Eb/5stVJX6kGagVMijcU2FmfeD8Qv7UXc5d92o="},"fv":"bc13aeaed568be76eab84df88ff39261bb52ff70","ps":[]}
+,"nix-jetbrains-plugins":{"kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-jetbrains-plugins/archive/8f09f42ba523085dd22896acfc31e327e4b14fbb.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-5JCdhEVaATMZvpFRx4/s+E39YFqrO46+fB8C/xjP6po="},"fv":"8f09f42ba523085dd22896acfc31e327e4b14fbb","ps":[]}
+,"nix-maid":{"kd":[1,{"ft":0,"ur":"https://github.com/viperML/nix-maid/archive/c79bffc8be26c8ad04b709453670263cec66bfe0.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-7+yBgfNkfCIsuEf+mG7XAaYWCoFl81GF0KM3Mh2b96w="},"fv":"c79bffc8be26c8ad04b709453670263cec66bfe0","ps":[]}
+,"nix-wrapper-modules":{"kd":[1,{"ft":0,"ur":"https://github.com/BirdeeHub/nix-wrapper-modules/archive/70795f6eb74a69d736e41ee837cd7e1a6d46c0aa.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-bJxBN+ebX3yZj+KT/c+LeA4xIpoNghG233szgRFAWOc="},"fv":"70795f6eb74a69d736e41ee837cd7e1a6d46c0aa","ps":[]}
+}
+,"p":{}
+}

@@ -1,6 +1,6 @@
 {
-  pkgs ? (import (import ./npins).nixpkgs-unstable {}),
-  nix-wrapper-modules ? (import (import ./npins).nix-wrapper-modules { inherit pkgs; }),
+  pkgs ? (import (import ./nix/tamal {}).nixpkgs {}),
+  nix-wrapper-modules ? (import (import ./nix/tamal {}).nix-wrapper-modules { inherit pkgs; }),
 }:
 
 let

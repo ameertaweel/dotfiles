@@ -3,13 +3,14 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 let
-  sources = import ./npins;
-
-  nixpkgsChannel = sources.nixos-unstable;
   nixpkgsHostPlatform = "x86_64-linux";
   stateVersion = "25.11";
-
   fullName = "Ameer Taweel";
+
+  sources = import ./nix/tamal {
+    system = nixpkgsHostPlatform;
+  };
+  nixpkgsChannel = sources.nixpkgs;
 
   configuration =
     {

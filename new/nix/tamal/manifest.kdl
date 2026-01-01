@@ -1,0 +1,59 @@
+// ┏┓╻+╻ ╱┏┳┓┏┓┏┳┓┏┓╻
+// ┃┃┃┃┗━┓╹┃╹┣┫┃┃┃┣┫┃   Read the manpage:
+// ╹┗┛╹╱ ╹ ╹ ╹╹╹ ╹╹╹┗┛  $ man nixtamal-manifest
+version "1.0.0"
+inputs {
+	nixpkgs {
+		archive {
+			url "{{fresh_value}}/nixexprs.tar.xz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ curl -Ls --http2 --compressed -o "/dev/null" -w "%{url_effective}" "https://channels.nixos.org/nixos-unstable"
+		}
+	}
+
+	nix-index-database {
+		archive {
+			url "https://github.com/nix-community/nix-index-database/archive/{{fresh_value}}.tar.gz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ git ls-remote "https://github.com/nix-community/nix-index-database.git" --refs "refs/heads/main"
+			| cut -f1
+		}
+	}
+
+	nix-maid {
+		archive {
+			url "https://github.com/viperML/nix-maid/archive/{{fresh_value}}.tar.gz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ git ls-remote "https://github.com/viperML/nix-maid.git" --refs "refs/heads/master"
+			| cut -f1
+		}
+	}
+
+	nix-wrapper-modules {
+		archive {
+			url "https://github.com/BirdeeHub/nix-wrapper-modules/archive/{{fresh_value}}.tar.gz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ git ls-remote "https://github.com/BirdeeHub/nix-wrapper-modules.git" --refs "refs/heads/main"
+			| cut -f1
+		}
+	}
+
+	nix-jetbrains-plugins {
+		archive {
+			url "https://github.com/nix-community/nix-jetbrains-plugins/archive/{{fresh_value}}.tar.gz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ git ls-remote "https://github.com/nix-community/nix-jetbrains-plugins.git" --refs "refs/heads/main"
+			| cut -f1
+		}
+	}
+}
