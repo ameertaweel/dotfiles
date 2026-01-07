@@ -1,0 +1,30 @@
+{
+  "pins": {
+    "nix-index-database": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nix-index-database"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "82befcf7dc77c909b0f2a09f5da910ec95c5b78f",
+      "url": "https://github.com/nix-community/nix-index-database/archive/82befcf7dc77c909b0f2a09f5da910ec95c5b78f.tar.gz",
+      "hash": "sha256-d3NBA9zEtBu2JFMnTBqWj7Tmi7R5OikoU2ycrdhQEws="
+    },
+    "nixos-stable": {
+      "type": "Channel",
+      "name": "nixos-25.11",
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.3265.3c9db02515ef/nixexprs.tar.xz",
+      "hash": "sha256-BroLZHVDysnh4EdOKKFVVu44/9LYjwZnDdpcQEd6g68="
+    },
+    "nixos-unstable": {
+      "type": "Channel",
+      "name": "nixos-unstable",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre922875.9f0c42f8bc71/nixexprs.tar.xz",
+      "hash": "sha256-XGMkFuE+RUk53OkOzxSNQdavHwdbQzCzLnv+IvsJZKs="
+    }
+  },
+  "version": 7
+}
