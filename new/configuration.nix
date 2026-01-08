@@ -9,6 +9,8 @@ let
   nixpkgsHostPlatform = "x86_64-linux";
   stateVersion = "26.05";
 
+  fullName = "Ameer Taweel";
+
   configuration =
     {
       config,
@@ -30,15 +32,8 @@ let
 
       # networking.hostName = "nixos"; # Define your hostname.
 
-      # Configure network connections interactively with nmcli or nmtui.
-      networking.networkmanager.enable = true;
-
       # Set your time zone.
       # time.timeZone = "Europe/Amsterdam";
-
-      # Configure network proxy if necessary
-      # networking.proxy.default = "http://user:password@proxy:port/";
-      # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
       # Select internationalisation properties.
       # i18n.defaultLocale = "en_US.UTF-8";
@@ -55,6 +50,8 @@ let
       services.displayManager.gdm.enable = true;
       services.desktopManager.gnome.enable = true;
 
+      hardware.bluetooth.enable = true;
+
       # Configure keymap in X11
       # services.xserver.xkb.layout = "us";
       # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -67,9 +64,11 @@ let
       # Define a user account. Don't forget to set a password with ‘passwd’.
       users.users.labmem001 = {
         isNormalUser = true;
+        description = fullName;
         extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
         packages = with pkgs; [
           tree
+          brave
         ];
         password = "labmem001";
         custom = {
@@ -89,6 +88,8 @@ let
 
       custom.virtualBox.enable = true;
       custom.virtualBox.headless = false;
+
+      custom.windowsDualBootFix.enable = true;
 
       # programs.firefox.enable = true;
 
@@ -111,12 +112,6 @@ let
 
       # Enable the OpenSSH daemon.
       # services.openssh.enable = true;
-
-      # Open ports in the firewall.
-      # networking.firewall.allowedTCPPorts = [ ... ];
-      # networking.firewall.allowedUDPPorts = [ ... ];
-      # Or disable the firewall altogether.
-      # networking.firewall.enable = false;
 
       # Copy the NixOS configuration file and link it from the resulting system
       # (/run/current-system/configuration.nix). This is useful in case you

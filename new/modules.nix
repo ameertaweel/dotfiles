@@ -13,5 +13,7 @@
     # ./laptop.nix
     ./nix-index.nix
     ./anydesk.nix
+    ./windows-dual-boot-fix.nix
+    ./networking.nix
   ];
 }
