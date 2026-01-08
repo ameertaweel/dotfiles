@@ -13,6 +13,19 @@
       "url": "https://github.com/nix-community/nix-index-database/archive/82befcf7dc77c909b0f2a09f5da910ec95c5b78f.tar.gz",
       "hash": "sha256-d3NBA9zEtBu2JFMnTBqWj7Tmi7R5OikoU2ycrdhQEws="
     },
+    "nix-maid": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "viperML",
+        "repo": "nix-maid"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "a2aab233f853c107ffc9a9d59ef25401bc2b2965",
+      "url": "https://github.com/viperML/nix-maid/archive/a2aab233f853c107ffc9a9d59ef25401bc2b2965.tar.gz",
+      "hash": "sha256-7KBOKp4GoL324MHEDns4sQmdV5hhdqcgfRIjBHSizh8="
+    },
     "nixos-stable": {
       "type": "Channel",
       "name": "nixos-25.11",

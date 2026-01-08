@@ -1,9 +1,36 @@
-{ pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (import ./npins) nix-index-database;
   packages = import nix-index-database { inherit pkgs; };
+
+  cnf = config.custom.nix-index;
 in
 {
-  programs.nix-index.enable = true;
-  programs.nix-index.package = packages.nix-index-with-db;
+  options = {
+    custom.nix-index.enable = lib.mkOption {
+      description = ''
+        Whether to enable `nix-index`, a file database for Nixpkgs.
+      '';
+      type = lib.types.bool;
+      default = false;
+    };
+  };
+
+  config = lib.mkIf (cnf.enable) {
+    programs.command-not-found.enable = false;
+
+    programs.nix-index = {
+      enable = true;
+      package = packages.nix-index-with-db;
+    };
+
+    environment.systemPackages = [
+      packages.comma-with-db
+    ];
+  };
 }

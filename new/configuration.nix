@@ -76,15 +76,16 @@ let
           adbUser = true;
           dockerUser = true;
           podmanUser = true;
-          virtualBoxUser = true;
+          virtualBoxUser = false;
         };
       };
 
+      custom.nix-index.enable = true;
       custom.podman.enable = true;
       custom.docker.enable = true;
       custom.guix.enable = true;
 
-      custom.virtualBox.enable = true;
+      custom.virtualBox.enable = false;
       custom.virtualBox.headless = true;
 
       # programs.firefox.enable = true;
