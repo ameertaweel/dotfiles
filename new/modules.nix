@@ -12,5 +12,6 @@
     # ./pc.nix
     # ./laptop.nix
     ./nix-index.nix
+    ./anydesk.nix
   ];
 }

@@ -49,11 +49,11 @@ let
       # };
 
       # Enable the X11 windowing system.
-      # services.xserver.enable = false;
+      services.xserver.enable = false;
 
       # Enable the GNOME Desktop Environment.
-      # services.displayManager.gdm.enable = true;
-      # services.desktopManager.gnome.enable = true;
+      services.displayManager.gdm.enable = true;
+      services.desktopManager.gnome.enable = true;
 
       # Configure keymap in X11
       # services.xserver.xkb.layout = "us";
@@ -76,7 +76,9 @@ let
           adbUser = true;
           dockerUser = true;
           podmanUser = true;
-          virtualBoxUser = false;
+          virtualBoxUser = true;
+
+          anydesk.enable = true;
         };
       };
 
@@ -85,8 +87,8 @@ let
       custom.docker.enable = true;
       custom.guix.enable = true;
 
-      custom.virtualBox.enable = false;
-      custom.virtualBox.headless = true;
+      custom.virtualBox.enable = true;
+      custom.virtualBox.headless = false;
 
       # programs.firefox.enable = true;
 
