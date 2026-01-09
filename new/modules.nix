@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./nix-maid.nix
     ./nixpkgs.nix
     ./adb.nix
     ./docker.nix
