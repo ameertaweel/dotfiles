@@ -14,5 +14,7 @@
     ./anydesk.nix
     ./windows-dual-boot-fix.nix
     ./networking.nix
+    ./jetbrains.nix
+    ./pycharm-oss.nix
   ];
 }

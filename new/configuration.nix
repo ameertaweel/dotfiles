@@ -104,9 +104,10 @@ let
         isNormalUser = true;
         description = fullName;
     	extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
-        packages = with pkgs; [
-          tree
-          brave
+        packages = [
+          pkgs.brave
+          pkgs.vlc
+          (pkgs.jetbrains.mkPyCharmOSSWithPlugins ["IdeaVIM"])
         ];
         password = "labmem001";
         custom = {
@@ -133,10 +134,13 @@ let
 
       # List packages installed in system profile.
       # You can use https://search.nixos.org/ to find more packages (and options).
-      # environment.systemPackages = with pkgs; [
-      #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #   wget
-      # ];
+      environment.systemPackages = [
+        pkgs.tree
+        pkgs.vim
+        pkgs.wget
+        pkgs.git
+        pkgs.file
+      ];
 
       # Some programs need SUID wrappers, can be configured further or are
       # started in user sessions.

@@ -13,6 +13,19 @@
       "url": "https://github.com/nix-community/nix-index-database/archive/82befcf7dc77c909b0f2a09f5da910ec95c5b78f.tar.gz",
       "hash": "sha256-d3NBA9zEtBu2JFMnTBqWj7Tmi7R5OikoU2ycrdhQEws="
     },
+    "nix-jetbrains-plugins": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nix-jetbrains-plugins"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "42541d98ac498eb142d9a643eef2fa79ae512bb9",
+      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/42541d98ac498eb142d9a643eef2fa79ae512bb9.tar.gz",
+      "hash": "sha256-aUkLLDm3YTFoVCAivnJsjSWzzMaZKtmekmtpSFUO4kE="
+    },
     "nix-maid": {
       "type": "Git",
       "repository": {
