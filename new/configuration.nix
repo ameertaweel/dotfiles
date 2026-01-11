@@ -107,7 +107,7 @@ let
         packages = [
           pkgs.brave
           pkgs.vlc
-          pkgs.custom.jetbrains.pycharm
+          pkgs.custom.jetbrains.pycharm-oss
           pkgs.custom.jetbrains.idea
           # pkgs.custom.android-studio
         ];
@@ -143,6 +143,8 @@ let
         pkgs.git
         pkgs.file
       ];
+
+      programs.direnv.enable = true;
 
       # Some programs need SUID wrappers, can be configured further or are
       # started in user sessions.

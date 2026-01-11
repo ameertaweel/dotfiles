@@ -2,6 +2,7 @@
 {
   imports = [
     ./nixpkgs.nix
+    ./nix-maid.nix
     ./adb.nix
     ./docker.nix
     ./podman.nix
