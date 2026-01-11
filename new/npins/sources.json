@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "42541d98ac498eb142d9a643eef2fa79ae512bb9",
-      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/42541d98ac498eb142d9a643eef2fa79ae512bb9.tar.gz",
-      "hash": "sha256-aUkLLDm3YTFoVCAivnJsjSWzzMaZKtmekmtpSFUO4kE="
+      "revision": "9280778f3074c714877cf19b5382057da7913c31",
+      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/9280778f3074c714877cf19b5382057da7913c31.tar.gz",
+      "hash": "sha256-LwCPV4j++pbD1i7xH/62tUlEo/okeCcBQURspkSs+Go="
     },
     "nix-maid": {
       "type": "Git",

@@ -1,14 +1,18 @@
-{config, ...}: let
+{...}: let
   sources = import ./npins;
-  jetbrainsLib = (import sources.nix-jetbrains-plugins).lib.${config.nixpkgs.hostPlatform.system};
+  jetbrainsLib = (import sources.nix-jetbrains-plugins).lib;
+  mkIDE = jetbrainsLib.buildIdeWithPlugins;
 in {
   # Example usage of this function:
-  # (pkgs.jetbrains.mkJetbrainsIDE "idea" ["com.intellij.plugins.watcher"])
+  # (pkgs.custom.jetbrains.mkIDEWithPlugins "idea" ["com.intellij.plugins.watcher"])
 
-  nixpkgs.overlays = [ (final: prev: {
-	jetbrains = prev.jetbrains // {
-		mkIDEWithPlugins = jetbrainsLib.buildIdeWithPlugins final.jetbrains;
-};
-  }) ];
-
+  nixpkgs.overlays = [
+    (final: prev: {
+      custom = (prev.custom or {}) // {
+	jetbrains = (prev.custom.jetbrains or {}) // {
+	  mkIDEWithPlugins = mkIDE final;
+	};
+      };
+    })
+  ];
 }

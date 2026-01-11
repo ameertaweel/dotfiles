@@ -107,7 +107,9 @@ let
         packages = [
           pkgs.brave
           pkgs.vlc
-          (pkgs.jetbrains.mkPyCharmOSSWithPlugins ["IdeaVIM"])
+          pkgs.custom.jetbrains.pycharm
+          pkgs.custom.jetbrains.idea
+          # pkgs.custom.android-studio
         ];
         password = "labmem001";
         custom = {
