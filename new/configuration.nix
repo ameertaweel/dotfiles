@@ -107,9 +107,6 @@ let
         packages = [
           pkgs.brave
           pkgs.vlc
-          pkgs.custom.jetbrains.pycharm-oss
-          pkgs.custom.jetbrains.idea
-          # pkgs.custom.android-studio
         ];
         password = "labmem001";
         custom = {
@@ -119,6 +116,7 @@ let
           virtualBoxUser = false;
 
           anydesk.enable = true;
+          programs.jetbrains.pycharm-oss.enable = true;
         };
       };
 
