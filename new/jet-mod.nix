@@ -1,44 +1,60 @@
-{ideName, ideDisplayName, unfree ? false}:
+{
+  ideName,
+  ideDisplayName,
+  unfree ? false,
+}:
 
-{ lib, config, pkgs, ... }: let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
   userSubmodule =
-    { config, ... }: let
+    { config, ... }:
+    let
       cnf = config.custom.programs.jetbrains.${ideName};
-    in {
+    in
+    {
       options = {
-	custom.programs.jetbrains.${ideName} = {
-	  enable = lib.mkOption {
-	    description = ''
-	      Enable ${ideDisplayName} for the user.
-	    '';
-	    type = lib.types.bool;
-	    default = false;
-	  };
+        custom.programs.jetbrains.${ideName} = {
+          enable = lib.mkOption {
+            description = ''
+              Enable ${ideDisplayName} for the user.
+            '';
+            type = lib.types.bool;
+            default = false;
+          };
 
-	  plugins = lib.mkOption {
-	    description = ''
-	      ${ideDisplayName} plugins to install.
-	    '';
-	    type = lib.types.listOf lib.types.string;
-	    default = ["IdeaVIM"];
-	  };
-	};
+          ideaVIM.enable = lib.mkOption {
+            description = ''
+              Enable IdeaVIM plugin for ${ideDisplayName}.
+            '';
+            type = lib.types.bool;
+            default = true;
+          };
+
+          plugins = lib.mkOption {
+            description = ''
+              ${ideDisplayName} plugins to install.
+            '';
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
+          };
+        };
       };
 
-      config = lib.mkIf (cnf.enable) {
-	custom.nixMaidUser = true;
+      config = lib.mkIf (cnf.enable) (let
+        plugins = cnf.plugins ++ (if cnf.ideaVIM.enable then ["IdeaVIM"] else []);
+      in {
+        packages = [
+          (pkgs.custom.jetbrains.mkIDEWithPlugins ideName plugins)
+        ];
 
-	packages = [
-	  (pkgs.custom.jetbrains.mkIDEWithPlugins ideName cnf.plugins)
-	];
-
-      };
+        maid = lib.mkIf (cnf.ideaVIM.enable) (import ./ideavim {});
+      });
     };
-
-  ideUsers = builtins.attrNames (
-    lib.filterAttrs (user: userConfig: userConfig.custom.programs.jetbrains.${ideName}.enable) config.users.users
-  );
-  ideUsersCount = builtins.length ideUsers;
 in
 {
   options = {
@@ -48,15 +64,14 @@ in
   };
 
   config = {
-    custom.nixMaid.enable = lib.mkIf (ideUsersCount > 0) true;
-	custom.nixpkgs.allowUnfreePredicates = lib.mkIf (unfree) [
-	  (
-	    pkg:
-	    builtins.elem (lib.getName pkg) [
-	      ideName
-	      "${ideName}-with-plugins"
-	    ]
-	  )
-	];
+    custom.nixpkgs.allowUnfreePredicates = lib.mkIf (unfree) [
+      (
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          ideName
+          "${ideName}-with-plugins"
+        ]
+      )
+    ];
   };
 }
