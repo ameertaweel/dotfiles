@@ -12,11 +12,6 @@
 in {
   imports = [inputs.nix-colors.homeManagerModules.default];
 
-  # HTOP
-  programs.htop = {
-    enable = true;
-  };
-
   # BTOP
   programs.btop = {
     enable = true;

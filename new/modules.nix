@@ -17,5 +17,6 @@
     ./networking.nix
     ./jetbrains
     ./inputs.nix
+    ./cli-essentials.nix
   ];
 }

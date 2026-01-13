@@ -17,7 +17,6 @@
   };
 in {
   imports = [
-    ./rar.nix
     ./top.nix
   ];
 

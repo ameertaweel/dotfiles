@@ -137,13 +137,7 @@ let
 
       # List packages installed in system profile.
       # You can use https://search.nixos.org/ to find more packages (and options).
-      environment.systemPackages = [
-        pkgs.tree
-        pkgs.vim
-        pkgs.wget
-        pkgs.git
-        pkgs.file
-      ];
+      environment.systemPackages = [ ];
 
       programs.direnv.enable = true;
 

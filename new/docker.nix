@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 let
   userSubmodule =
     { config, ... }:
@@ -16,8 +16,9 @@ let
         };
       };
 
-      config = {
-        extraGroups = lib.mkIf (config.custom.dockerUser) [ "docker" ];
+      config = lib.mkIf (config.custom.dockerUser) {
+        extraGroups = [ "docker" ];
+        packages = [ pkgs.lazydocker ];
       };
     };
 
