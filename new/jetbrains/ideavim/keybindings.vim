@@ -1,5 +1,6 @@
-" Leader Key
-let mapleader = ','
+" # Leader Key
+
+let mapleader = ' '
 
 " # Moving between windows
 
@@ -32,29 +33,22 @@ vnoremap <leader>P "+P
 
 " # Code Formatting and Navigation
 
+" Actions
 map <leader>ar <Action>(RenameElement)
 map <leader>af <Action>(ReformatCode)
-" Fuzzy find files by name
+
+" Search
 map <leader>ff <Action>(GotoFile)
-map <leader>gd <Action>(GotoDeclaration)
-" List References
-map <leader>lr <Action>(FindUsages)
-map [d <Action>(GotoPreviousError)
-map ]d <Action>(GotoNextError)
+map <leader>fl <Action>(TextSearchAction)
+map <leader>fe <Action>(SearchEverywhere)
 
 " # Other Mappings
 
 " Enter creates a new line in normal mode
 nnoremap <cr> o<esc>
-
-" Enable folding with the space bar
-map <space> <Action>(CollapseBlock)
-
 " Remove highlighted search results
 nnoremap <leader>th :noh<cr>
-
 " Show registers
 nnoremap <leader>rg :reg<cr>
-
-" Make . to work with visually selected lines
+" Make . work with visually selected lines
 vnoremap . :normal.<cr>

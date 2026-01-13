@@ -45,15 +45,18 @@ let
         };
       };
 
-      config = lib.mkIf (cnf.enable) (let
-        plugins = cnf.plugins ++ (if cnf.ideaVIM.enable then ["IdeaVIM"] else []);
-      in {
-        packages = [
-          (pkgs.custom.jetbrains.mkIDEWithPlugins ideName plugins)
-        ];
+      config = lib.mkIf (cnf.enable) (
+        let
+          plugins = cnf.plugins ++ (if cnf.ideaVIM.enable then [ "IdeaVIM" ] else [ ]);
+        in
+        {
+          packages = [
+            (pkgs.custom.jetbrains.mkIDEWithPlugins ideName plugins)
+          ];
 
-        maid = lib.mkIf (cnf.ideaVIM.enable) (import ./ideavim {});
-      });
+          maid = lib.mkIf (cnf.ideaVIM.enable) (import ./ideavim { });
+        }
+      );
     };
 in
 {

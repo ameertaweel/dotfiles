@@ -24,46 +24,46 @@ let
         # Include the results of the hardware scan.
         # ./hardware-configuration.nix
         ./modules.nix
-      	./hardware-configuration.nix
+        ./hardware-configuration.nix
       ];
 
       # Use the systemd-boot EFI boot loader.
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
 
-  # Set your time zone.
-  time.timeZone = "Asia/Jerusalem";
+      # Set your time zone.
+      time.timeZone = "Asia/Jerusalem";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+      # Select internationalisation properties.
+      i18n.defaultLocale = "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
+      i18n.extraLocaleSettings = {
+        LC_ADDRESS = "en_GB.UTF-8";
+        LC_IDENTIFICATION = "en_GB.UTF-8";
+        LC_MEASUREMENT = "en_GB.UTF-8";
+        LC_MONETARY = "en_GB.UTF-8";
+        LC_NAME = "en_GB.UTF-8";
+        LC_NUMERIC = "en_GB.UTF-8";
+        LC_PAPER = "en_GB.UTF-8";
+        LC_TELEPHONE = "en_GB.UTF-8";
+        LC_TIME = "en_GB.UTF-8";
+      };
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+      # Enable sound with pipewire.
+      services.pulseaudio.enable = false;
+      security.rtkit.enable = true;
+      services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        # If you want to use JACK applications, uncomment this
+        #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+        # use the example session manager (no others are packaged yet so this is enabled by default,
+        # no need to redefine it in your config for now)
+        #media-session.enable = true;
+      };
 
       # networking.hostName = "nixos"; # Define your hostname.
 
@@ -103,7 +103,10 @@ let
       users.users.labmem001 = {
         isNormalUser = true;
         description = fullName;
-    	extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ]; # Enable ‘sudo’ for the user.
         packages = [
           pkgs.brave
           pkgs.vlc
@@ -116,7 +119,7 @@ let
           virtualBoxUser = false;
 
           anydesk.enable = true;
-          programs.jetbrains.pycharm-oss.enable = true;
+          programs.jetbrains.pycharm.enable = true;
         };
       };
 
@@ -189,4 +192,5 @@ let
     inherit configuration;
     system = null;
   };
-in nixos
+in
+nixos
