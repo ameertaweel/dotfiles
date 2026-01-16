@@ -1,4 +1,4 @@
-{lib, pkgs, ...}: {
+{config, lib, pkgs, ...}: {
   environment.systemPackages = [
     pkgs.file
     pkgs.tree
@@ -25,6 +25,11 @@
     pkgs.vim
     pkgs.git
     pkgs.tmux
+
+    (import ./tealdeer {
+      inherit pkgs;
+      inherit (config.custom.inputs) wrappers;
+    })
   ];
 
   programs.htop.enable = true;

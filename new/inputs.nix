@@ -15,7 +15,7 @@ in
       description = ''
         Inputs of this config.
       '';
-      type = lib.types.attrsOf lib.types.package;
+      type = lib.types.attrs;
       default = { };
     };
   };
@@ -25,6 +25,7 @@ in
 
     custom.inputs = {
       nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
+      wrappers = import sources.wrappers {};
     };
   };
 }

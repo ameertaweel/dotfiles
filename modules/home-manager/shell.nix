@@ -88,10 +88,4 @@ in {
 
     mosh
   ];
-
-  # `tldr` comand
-  programs.tealdeer = {
-    enable = true;
-    settings.updates.auto_update = true;
-  };
 }

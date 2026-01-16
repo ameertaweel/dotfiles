@@ -50,6 +50,19 @@
       "name": "nixos-unstable",
       "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre922875.9f0c42f8bc71/nixexprs.tar.xz",
       "hash": "sha256-XGMkFuE+RUk53OkOzxSNQdavHwdbQzCzLnv+IvsJZKs="
+    },
+    "wrappers": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Lassulus",
+        "repo": "wrappers"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "4cce9f9c17658f36d378a14809ff59029f0dcfb4",
+      "url": "https://github.com/Lassulus/wrappers/archive/4cce9f9c17658f36d378a14809ff59029f0dcfb4.tar.gz",
+      "hash": "sha256-6A4yLRkTvqpt8bfz7xy1O7F9sPlMCgz3PlImj97KDX0="
     }
   },
   "version": 7
