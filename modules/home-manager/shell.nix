@@ -78,22 +78,7 @@ in {
   home.packages = with pkgs; [
     cht-sh # Access cheatsheets from terminal
 
-    file # Determina file type
-    tree # List directory contents in a tree-like format
-    curl # Transfer URLs
-
     ffmpeg # Video Converter
-
-    ripgrep # `grep` clone
-    fd # `find` clone
-    bat # `cat` clone with syntax highlighting and `git` integration
-    sd # `sed` replacement
-
-    zip # Zip Compression
-    unzip # Zip Decompression
-
-    entr # Run arbitrary commands when files change
-    watch # Execute a command repeatedly, and monitor the output in full-screen mode
 
     # clipboard-jh # Terminal clipboard
 
@@ -102,8 +87,6 @@ in {
     sshfs
 
     mosh
-
-    carapace
   ];
 
   # `tldr` comand
