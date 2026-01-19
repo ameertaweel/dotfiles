@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   sources = import ./npins;
 in
@@ -25,7 +25,7 @@ in
 
     custom.inputs = {
       nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
-      wrappers = import sources.wrappers {};
+      wrappers = import sources.wrappers { inherit pkgs; };
     };
   };
 }

@@ -30,6 +30,10 @@
       inherit pkgs;
       inherit (config.custom.inputs) wrappers;
     })
+    (import ./btop {
+      inherit pkgs;
+      inherit (config.custom.inputs) wrappers;
+    })
   ];
 
   programs.htop.enable = true;

@@ -16,10 +16,6 @@
     mkdir = "mkdir -pv";
   };
 in {
-  imports = [
-    ./top.nix
-  ];
-
   home.sessionVariables = {
     GNUPGHOME = "${config.xdg.dataHome}/gnupg";
   };
