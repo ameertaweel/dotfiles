@@ -1,5 +1,10 @@
 {config, lib, pkgs, ...}: {
-  environment.systemPackages = [
+  environment.systemPackages = let
+    wrappedPkgs = import ./wrapped-pkgs.nix {
+      inherit pkgs;
+      inherit (config.custom.inputs) nix-wrapper-modules;
+    };
+  in [
     pkgs.file
     pkgs.tree
     pkgs.ripgrep # modern `grep`
@@ -26,14 +31,8 @@
     pkgs.git
     pkgs.tmux
 
-    (import ./tealdeer {
-      inherit pkgs;
-      inherit (config.custom.inputs) wrappers;
-    })
-    (import ./btop {
-      inherit pkgs;
-      inherit (config.custom.inputs) wrappers;
-    })
+    wrappedPkgs.btop
+    wrappedPkgs.tealdeer
   ];
 
   programs.htop.enable = true;

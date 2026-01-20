@@ -25,7 +25,7 @@ in
 
     custom.inputs = {
       nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
-      wrappers = import sources.wrappers { inherit pkgs; };
+      nix-wrapper-modules = import sources.nix-wrapper-modules { inherit pkgs; };
     };
   };
 }

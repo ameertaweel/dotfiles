@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9280778f3074c714877cf19b5382057da7913c31",
-      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/9280778f3074c714877cf19b5382057da7913c31.tar.gz",
-      "hash": "sha256-LwCPV4j++pbD1i7xH/62tUlEo/okeCcBQURspkSs+Go="
+      "revision": "13732bbe5459aa6ce230f4ce0a115577f576a49e",
+      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/13732bbe5459aa6ce230f4ce0a115577f576a49e.tar.gz",
+      "hash": "sha256-mhBMnQuKTiBvDincuQUs6y+SThi91yQgGqqa6mNc3ec="
     },
     "nix-maid": {
       "type": "Git",
@@ -39,30 +39,36 @@
       "url": "https://github.com/viperML/nix-maid/archive/a2aab233f853c107ffc9a9d59ef25401bc2b2965.tar.gz",
       "hash": "sha256-7KBOKp4GoL324MHEDns4sQmdV5hhdqcgfRIjBHSizh8="
     },
+    "nix-wrapper-modules": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "ed1064d7051bc633c4988cea845a7bff6c905f4a",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/ed1064d7051bc633c4988cea845a7bff6c905f4a.tar.gz",
+      "hash": "sha256-KiIPrT/JichKY7CiXm8PpPtiSa2wbFVJKd8ik6W4Msk="
+    },
     "nixos-stable": {
       "type": "Channel",
       "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.3265.3c9db02515ef/nixexprs.tar.xz",
-      "hash": "sha256-BroLZHVDysnh4EdOKKFVVu44/9LYjwZnDdpcQEd6g68="
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.4270.77ef7a29d276/nixexprs.tar.xz",
+      "hash": "sha256-k7FETMNTS8XLFRiIsoXWS3UwDYgrcjCpalLTR9rjnvY="
     },
     "nixos-unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre922875.9f0c42f8bc71/nixexprs.tar.xz",
-      "hash": "sha256-XGMkFuE+RUk53OkOzxSNQdavHwdbQzCzLnv+IvsJZKs="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre928726.e4bae1bd10c9/nixexprs.tar.xz",
+      "hash": "sha256-52qidqGYxRXmbJSh1IJKsqtVE0r8LD1gomW6SXBEeZM="
     },
-    "wrappers": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "Lassulus",
-        "repo": "wrappers"
-      },
-      "branch": "main",
-      "submodules": false,
-      "revision": "4cce9f9c17658f36d378a14809ff59029f0dcfb4",
-      "url": "https://github.com/Lassulus/wrappers/archive/4cce9f9c17658f36d378a14809ff59029f0dcfb4.tar.gz",
-      "hash": "sha256-6A4yLRkTvqpt8bfz7xy1O7F9sPlMCgz3PlImj97KDX0="
+    "nixpkgs-unstable": {
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre930106.bde090228871/nixexprs.tar.xz",
+      "hash": "sha256-N1BW0usecHQVLHKlH+d1NW6CS2At1s3sjpE+N0dOgl4="
     }
   },
   "version": 7
