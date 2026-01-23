@@ -8,4 +8,5 @@ let
 in {
   btop = callWrappedPkg ./btop.nix {};
   tealdeer = callWrappedPkg ./tealdeer.nix {};
+  wezterm = callWrappedPkg ./wezterm {};
 }

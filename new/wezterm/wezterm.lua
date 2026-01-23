@@ -41,14 +41,14 @@ local config = wezterm.config_builder()
 config.window_decorations = 'NONE'
 
 config.window_frame = {
-  font = wezterm.font({ family = 'Hack Nerd Font', weight = 'Bold' }),
+  font = wezterm.font({ family = 'JetBrains Mono', weight = 'Bold' }),
   font_size = 12,
 }
 
-config.color_scheme = 'Ayu Dark (Gogh)'
-
-config.font = wezterm.font({ family = 'Hack Nerd Font' })
+config.font = wezterm.font({ family = 'JetBrains Mono' })
 config.font_size = 12
+
+config.color_scheme = 'Ayu Dark (Gogh)'
 
 -- +--------------+
 -- | Key Bindings |
@@ -307,7 +307,7 @@ wezterm.on('update-status', function(window, pane)
   end)
 
   if active_pane_info ~= nil and active_pane_info.is_zoomed then
-    table.insert(status_elements, { Text = " ZOOMED " })
+    table.insert(status_elements, { Text = ' ZOOMED ' })
   end
 
   window:set_right_status(wezterm.format(status_elements))

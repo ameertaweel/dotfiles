@@ -107,9 +107,15 @@ let
           "networkmanager"
           "wheel"
         ]; # Enable ‘sudo’ for the user.
-        packages = [
+        packages = let
+          wrappedPkgs = import ./wrapped-pkgs.nix {
+            inherit pkgs;
+            inherit (config.custom.inputs) nix-wrapper-modules;
+          };
+        in [
           pkgs.brave
           pkgs.vlc
+          wrappedPkgs.wezterm
         ];
         password = "labmem001";
         custom = {
