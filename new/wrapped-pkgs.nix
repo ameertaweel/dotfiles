@@ -8,5 +8,6 @@ let
 in {
   btop = callWrappedPkg ./btop.nix {};
   tealdeer = callWrappedPkg ./tealdeer.nix {};
+  tmux = callWrappedPkg ./tmux {};
   wezterm = callWrappedPkg ./wezterm {};
 }

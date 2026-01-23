@@ -29,10 +29,10 @@
     # TODO: Better configuration for those guys
     pkgs.vim
     pkgs.git
-    pkgs.tmux
 
     wrappedPkgs.btop
     wrappedPkgs.tealdeer
+    wrappedPkgs.tmux
   ];
 
   programs.htop.enable = true;
