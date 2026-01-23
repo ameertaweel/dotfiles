@@ -40,12 +40,28 @@ local config = wezterm.config_builder()
 -- Removes the title bar, leaving only the tab bar.
 config.window_decorations = 'NONE'
 
+local custom_font_dirs = os.getenv('WEZTERM_CUSTOM_FONT_DIRS')
+if custom_font_dirs ~= nil then
+  local font_dirs = {}
+  -- Convert colon-separated string to a list
+  for match in string.gmatch(custom_font_dirs, '([^:]+)') do
+      font_dirs[#font_dirs + 1] = match
+  end
+  config.font_dirs = font_dirs
+end
+
 config.window_frame = {
-  font = wezterm.font({ family = 'JetBrains Mono', weight = 'Bold' }),
+  font = wezterm.font_with_fallback {
+    { family = 'Hack Nerd Font', weight = 'Bold' },
+    { family = 'JetBrains Mono', weight = 'Bold' }, -- Bundled with WezTerm
+  },
   font_size = 12,
 }
 
-config.font = wezterm.font({ family = 'JetBrains Mono' })
+config.font = wezterm.font_with_fallback {
+  { family = 'Hack Nerd Font', weight = 'Regular' },
+  { family = 'JetBrains Mono', weight = 'Regular' }, -- Bundled with WezTerm
+}
 config.font_size = 12
 
 config.color_scheme = 'Ayu Dark (Gogh)'
