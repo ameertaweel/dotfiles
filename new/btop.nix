@@ -1,6 +1,6 @@
 {nix-wrapper-modules, pkgs}:
 
-nix-wrapper-modules.wrappedModules.btop.wrap ({ ... }: {
+nix-wrapper-modules.wrappers.btop.wrap ({ ... }: {
   inherit pkgs;
 
   settings = {

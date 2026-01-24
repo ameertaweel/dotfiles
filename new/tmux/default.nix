@@ -1,6 +1,6 @@
 {nix-wrapper-modules, pkgs}:
 
-nix-wrapper-modules.wrappedModules.tmux.wrap ({ ... }: {
+nix-wrapper-modules.wrappers.tmux.wrap ({ ... }: {
   inherit pkgs;
 
   configAfter = ''

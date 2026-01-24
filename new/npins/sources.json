@@ -48,9 +48,22 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "ed1064d7051bc633c4988cea845a7bff6c905f4a",
-      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/ed1064d7051bc633c4988cea845a7bff6c905f4a.tar.gz",
-      "hash": "sha256-KiIPrT/JichKY7CiXm8PpPtiSa2wbFVJKd8ik6W4Msk="
+      "revision": "9a9f10119294b22de06f62b38cf7c41f12adbdc6",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/9a9f10119294b22de06f62b38cf7c41f12adbdc6.tar.gz",
+      "hash": "sha256-4VKcuNhkl03W9A/KMWx3Evpcc3Po4+Th7uC5VmFyqAM="
+    },
+    "nix-wrapper-modules-fork": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ameertaweel",
+        "repo": "nix-wrapper-modules"
+      },
+      "branch": "module-vim-init",
+      "submodules": false,
+      "revision": "fc01f2034f23c0bd3f8c4a721bd3201c257cb09a",
+      "url": "https://github.com/ameertaweel/nix-wrapper-modules/archive/fc01f2034f23c0bd3f8c4a721bd3201c257cb09a.tar.gz",
+      "hash": "sha256-GIUKUcck3XKXYYNSIGo7CmASiF1ilKgWNVmyeKogjs0="
     },
     "nixos-stable": {
       "type": "Channel",

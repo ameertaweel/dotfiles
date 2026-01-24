@@ -26,8 +26,8 @@
     pkgs.entr  # Run arbitrary commands when files change
     pkgs.watch # Execute a command repeatedly, and monitor the output in full-screen mode
 
-    # TODO: Better configuration for those guys
-    pkgs.vim
+    # TODO: Better place for those guys
+    wrappedPkgs.vim
     pkgs.git
 
     wrappedPkgs.btop

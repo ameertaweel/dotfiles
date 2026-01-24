@@ -1,6 +1,6 @@
 {nix-wrapper-modules, pkgs}:
 
-nix-wrapper-modules.wrappedModules.tealdeer.wrap ({ ... }: {
+nix-wrapper-modules.wrappers.tealdeer.wrap ({ ... }: {
   inherit pkgs;
 
   settings = {

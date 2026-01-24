@@ -1,6 +1,6 @@
 {nix-wrapper-modules, pkgs}:
 
-nix-wrapper-modules.wrappedModules.wezterm.wrap ({ ... }: {
+nix-wrapper-modules.wrappers.wezterm.wrap ({ ... }: {
   inherit pkgs;
 
   "wezterm.lua".path = ./wezterm.lua;
