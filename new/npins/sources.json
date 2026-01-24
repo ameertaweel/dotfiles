@@ -77,6 +77,22 @@
       "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre928726.e4bae1bd10c9/nixexprs.tar.xz",
       "hash": "sha256-52qidqGYxRXmbJSh1IJKsqtVE0r8LD1gomW6SXBEeZM="
     },
+    "nixos-wsl": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "NixOS-WSL"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "2505.7.0",
+      "revision": "eabf2ecbb69a6d501b4e85117f4799e0efb0e889",
+      "url": "https://api.github.com/repos/nix-community/NixOS-WSL/tarball/refs/tags/2505.7.0",
+      "hash": "sha256-raHUt6k7rfRYL8FmoBn5jlIHo+VY6XdWP91gFolWHE4="
+    },
     "nixpkgs-unstable": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
