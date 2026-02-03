@@ -22,9 +22,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "13732bbe5459aa6ce230f4ce0a115577f576a49e",
-      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/13732bbe5459aa6ce230f4ce0a115577f576a49e.tar.gz",
-      "hash": "sha256-mhBMnQuKTiBvDincuQUs6y+SThi91yQgGqqa6mNc3ec="
+      "revision": "1d496fa90ada916bd926228131f8ad04d7a854aa",
+      "url": "https://github.com/nix-community/nix-jetbrains-plugins/archive/1d496fa90ada916bd926228131f8ad04d7a854aa.tar.gz",
+      "hash": "sha256-8h3p12GjiDOP7YDVS5Gx/bqjPQL4tFdDr90Ki7Qtglw="
     },
     "nix-maid": {
       "type": "Git",
@@ -35,9 +35,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "a2aab233f853c107ffc9a9d59ef25401bc2b2965",
-      "url": "https://github.com/viperML/nix-maid/archive/a2aab233f853c107ffc9a9d59ef25401bc2b2965.tar.gz",
-      "hash": "sha256-7KBOKp4GoL324MHEDns4sQmdV5hhdqcgfRIjBHSizh8="
+      "revision": "303e67a8c67d1ba1416abd8842d206a57b46f832",
+      "url": "https://github.com/viperML/nix-maid/archive/303e67a8c67d1ba1416abd8842d206a57b46f832.tar.gz",
+      "hash": "sha256-nvybtwQnyGeUbAq/iOMnt0rOGrp8nkyjnZTW9XIsrfI="
     },
     "nix-wrapper-modules": {
       "type": "Git",
@@ -48,34 +48,21 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "9a9f10119294b22de06f62b38cf7c41f12adbdc6",
-      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/9a9f10119294b22de06f62b38cf7c41f12adbdc6.tar.gz",
-      "hash": "sha256-4VKcuNhkl03W9A/KMWx3Evpcc3Po4+Th7uC5VmFyqAM="
-    },
-    "nix-wrapper-modules-fork": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "ameertaweel",
-        "repo": "nix-wrapper-modules"
-      },
-      "branch": "module-vim-init",
-      "submodules": false,
-      "revision": "fc01f2034f23c0bd3f8c4a721bd3201c257cb09a",
-      "url": "https://github.com/ameertaweel/nix-wrapper-modules/archive/fc01f2034f23c0bd3f8c4a721bd3201c257cb09a.tar.gz",
-      "hash": "sha256-GIUKUcck3XKXYYNSIGo7CmASiF1ilKgWNVmyeKogjs0="
+      "revision": "899b9c8f5331d9cfe649750e11a9b6971747493c",
+      "url": "https://github.com/BirdeeHub/nix-wrapper-modules/archive/899b9c8f5331d9cfe649750e11a9b6971747493c.tar.gz",
+      "hash": "sha256-IKj3Jy9GAxWGUWsW6UgmMywkclk4lqPRkFzpRv3y7mE="
     },
     "nixos-stable": {
       "type": "Channel",
       "name": "nixos-25.11",
-      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.4270.77ef7a29d276/nixexprs.tar.xz",
-      "hash": "sha256-k7FETMNTS8XLFRiIsoXWS3UwDYgrcjCpalLTR9rjnvY="
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.5148.d04d8548aed3/nixexprs.tar.xz",
+      "hash": "sha256-vjf12z2BoYWiYdZ+O9P2CvR5SFMNVpGSuqME3BcpFjs="
     },
     "nixos-unstable": {
       "type": "Channel",
       "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre928726.e4bae1bd10c9/nixexprs.tar.xz",
-      "hash": "sha256-52qidqGYxRXmbJSh1IJKsqtVE0r8LD1gomW6SXBEeZM="
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre939624.e6eae2ee2110/nixexprs.tar.xz",
+      "hash": "sha256-34H0Zx1/bA5yyd20kC/QZGBj417IETp6jiF7wH4RKrs="
     },
     "nixos-wsl": {
       "type": "GitRelease",
@@ -96,8 +83,8 @@
     "nixpkgs-unstable": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre930106.bde090228871/nixexprs.tar.xz",
-      "hash": "sha256-N1BW0usecHQVLHKlH+d1NW6CS2At1s3sjpE+N0dOgl4="
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.05pre939591.4533d9293756/nixexprs.tar.xz",
+      "hash": "sha256-sqbW9WRO7FbtmqHILN899J8/XZysbYqzPgTg281T1Gs="
     }
   },
   "version": 7

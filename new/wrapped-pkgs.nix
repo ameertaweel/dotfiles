@@ -1,6 +1,6 @@
 {
   pkgs ? (import (import ./npins).nixpkgs-unstable {}),
-  nix-wrapper-modules ? (import (import ./npins).nix-wrapper-modules-fork { inherit pkgs; }),
+  nix-wrapper-modules ? (import (import ./npins).nix-wrapper-modules { inherit pkgs; }),
 }:
 
 let
