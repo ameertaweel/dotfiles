@@ -34,13 +34,6 @@ in
   };
 
   config = {
-    custom.nixpkgs.allowUnfreePredicates = [
-      (
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "anydesk"
-        ]
-      )
-    ];
+    nixpkgs.config.allowUnfreePackages = [ "anydesk" ];
   };
 }

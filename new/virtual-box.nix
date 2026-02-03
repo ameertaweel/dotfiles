@@ -80,13 +80,6 @@ in
       headless = lib.mkIf opt.headless.isDefined cnf.headless;
     };
 
-    custom.nixpkgs.allowUnfreePredicates = [
-      (
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "Oracle_VirtualBox_Extension_Pack"
-        ]
-      )
-    ];
+    nixpkgs.config.allowUnfreePackages = [ "Oracle_VirtualBox_Extension_Pack" ];
   };
 }

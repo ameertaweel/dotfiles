@@ -67,14 +67,9 @@ in
   };
 
   config = {
-    custom.nixpkgs.allowUnfreePredicates = lib.mkIf (unfree) [
-      (
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          ideName
-          "${ideName}-with-plugins"
-        ]
-      )
-    ];
+    nixpkgs.config.allowUnfreePackages = if (unfree) then [
+      ideName
+      "${ideName}-with-plugins"
+    ] else [];
   };
 }

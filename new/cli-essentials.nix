@@ -37,12 +37,5 @@
 
   programs.htop.enable = true;
 
-  custom.nixpkgs.allowUnfreePredicates = [
-    (
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "rar"
-      ]
-    )
-  ];
+  nixpkgs.config.allowUnfreePackages = [ "rar" ];
 }
