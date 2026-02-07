@@ -82,8 +82,8 @@ let
       services.xserver.enable = false;
 
       # Enable the GNOME Desktop Environment.
-      services.displayManager.gdm.enable = true;
-      services.desktopManager.gnome.enable = true;
+      # services.displayManager.gdm.enable = true;
+      # services.desktopManager.gnome.enable = true;
 
       hardware.bluetooth.enable = true;
 
@@ -107,6 +107,12 @@ let
           "networkmanager"
           "wheel"
         ]; # Enable ‘sudo’ for the user.
+        shell = let
+          wrappedPkgs = import ./wrapped-pkgs.nix {
+            inherit pkgs;
+            inherit (config.custom.inputs) nix-wrapper-modules;
+          };
+        in "${wrappedPkgs.bash}/bin/bash";
         packages = let
           wrappedPkgs = import ./wrapped-pkgs.nix {
             inherit pkgs;
@@ -116,6 +122,7 @@ let
           pkgs.brave
           pkgs.vlc
           wrappedPkgs.wezterm
+          wrappedPkgs.bash
         ];
         password = "labmem001";
         custom = {

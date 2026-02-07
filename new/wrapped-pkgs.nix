@@ -11,4 +11,5 @@ in {
   tmux = callWrappedPkg ./tmux {};
   vim = callWrappedPkg ./vim {};
   wezterm = callWrappedPkg ./wezterm {};
+  bash = callWrappedPkg ./bash.nix {};
 }
