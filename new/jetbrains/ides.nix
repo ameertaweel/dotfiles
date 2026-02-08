@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     (import ./mk-ide-module.nix {
       ideName = "idea-oss";
