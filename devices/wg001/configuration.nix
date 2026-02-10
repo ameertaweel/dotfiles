@@ -37,6 +37,18 @@
   };
   services.redis.servers."".enable = true;
 
+  services.guix = {
+    enable = true;
+    gc = {
+      enable = true;
+      dates = "weekly";
+      extraArgs = [
+        "--delete-generations=1m"
+        "--vacuum-database"
+      ];
+    };
+  };
+
   # https://nix-community.github.io/NixOS-WSL/how-to/vscode.html
   programs.nix-ld.enable = true;
 

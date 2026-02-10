@@ -9,4 +9,5 @@
 
   wsl.enable = true;
   wsl.defaultUser = params.username;
+  wsl.startMenuLaunchers = true;
 }

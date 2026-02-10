@@ -1,5 +1,7 @@
 {
   params,
+  lib,
+  pkgs,
   ...
 }: {
   # TODO: Import From `../../modules/home-manager/core.nix` [START]
@@ -24,8 +26,14 @@
 
   imports = [
     ../../modules/home-manager/documents/zathura.nix
-    ../../modules/home-manager/jetbrains/pycharm-professional.nix
     ../../modules/home-manager/vim
     ../../modules/home-manager/xdg.nix
+  ];
+
+  home.packages = [
+    pkgs.jetbrains.pycharm
+  ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "pycharm"
   ];
 }
