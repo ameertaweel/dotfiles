@@ -11,5 +11,11 @@ in {
   tmux = callWrappedPkg ./tmux {};
   vim = callWrappedPkg ./vim {};
   wezterm = callWrappedPkg ./wezterm {};
-  bash = callWrappedPkg ./bash.nix {};
+  bash = (import ./bash.nix { inherit nix-wrapper-modules; }).config.wrap({...}: {
+    config.pkgs = pkgs;
+
+    config.baseDirs.enable = true;
+    config.userDirs.enable = true;
+    config.userDirs.setSessionVariables = true;
+  });
 }

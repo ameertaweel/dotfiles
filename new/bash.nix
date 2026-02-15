@@ -1,223 +1,249 @@
-{nix-wrapper-modules, pkgs}:
+{ nix-wrapper-modules }:
 
-(nix-wrapper-modules.lib.evalModule ({ config, wlib, lib, ... }: let
-  types = lib.types;
-  pathAsStr = types.coercedTo types.path toString types.str;
-in {
-  # You can only grab the final package if you supply pkgs!
-  # But if you were making it for someone else, you would want them to do that!
+(nix-wrapper-modules.lib.evalModule (
+  {
+    config,
+    wlib,
+    lib,
+    pkgs,
+    ...
+  }:
+  let
+    types = lib.types;
+    pathAsStr = types.coercedTo types.path toString types.str;
+  in
+  {
+    # You can only grab the final package if you supply pkgs!
+    # But if you were making it for someone else, you would want them to do that!
 
-  config.pkgs = pkgs;
+    # include wlib.modules.makeWrapper and wlib.modules.symlinkScript
+    imports = [ wlib.modules.default ];
+    # The core options are focused on building a wrapper derivation.
+    # different wrapper options may be implemented on top, for things like bubblewrap or other tools.
+    # `wlib.modules.default` gives you a great module-based pkgs.makeWrapper to use.
 
-  # include wlib.modules.makeWrapper and wlib.modules.symlinkScript
-  imports = [ wlib.modules.default ];
-  # The core options are focused on building a wrapper derivation.
-  # different wrapper options may be implemented on top, for things like bubblewrap or other tools.
-  # `wlib.modules.default` gives you a great module-based pkgs.makeWrapper to use.
+    options = {
+      baseDirs.enable = lib.mkEnableOption "management of XDG base directories";
 
-  options = {
-    enable = lib.mkEnableOption "management of XDG base directories";
+      baseDirs.cacheHome = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/.cache";
+        description = ''
+          Absolute path to directory holding application caches.
 
-    cacheHome = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/.cache";
-      description = ''
-        Absolute path to directory holding application caches.
+          Sets `XDG_CACHE_HOME` for the user if `xdg.enable` is set `true`.
+        '';
+      };
 
-        Sets `XDG_CACHE_HOME` for the user if `xdg.enable` is set `true`.
-      '';
+      baseDirs.configHome = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/.config";
+        description = ''
+          Absolute path to directory holding application configurations.
+
+          Sets `XDG_CONFIG_HOME` for the user if `xdg.enable` is set `true`.
+        '';
+      };
+
+      baseDirs.dataHome = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/.local/share";
+        description = ''
+          Absolute path to directory holding application data.
+
+          Sets `XDG_DATA_HOME` for the user if `xdg.enable` is set `true`.
+        '';
+      };
+
+      baseDirs.stateHome = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/.local/state";
+        description = ''
+          Absolute path to directory holding application states.
+
+          Sets `XDG_STATE_HOME` for the user if `xdg.enable` is set `true`.
+        '';
+      };
+
+      userDirs.enable = lib.mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          Whether to manage {file}`$XDG_CONFIG_HOME/user-dirs.dirs`.
+
+          The generated file is read-only.
+        '';
+      };
+
+      userDirs.package = lib.mkPackageOption pkgs "xdg-user-dirs" { nullable = true; };
+
+      # Well-known directory list from
+      # https://gitlab.freedesktop.org/xdg/xdg-user-dirs/blob/master/man/user-dirs.dirs.xml
+
+      userDirs.desktop = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Desktop";
+        description = "The Desktop directory.";
+      };
+
+      userDirs.documents = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Documents";
+        description = "The Documents directory.";
+      };
+
+      userDirs.download = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Downloads";
+        description = "The Downloads directory.";
+      };
+
+      userDirs.music = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Music";
+        description = "The Music directory.";
+      };
+
+      userDirs.pictures = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Pictures";
+        description = "The Pictures directory.";
+      };
+
+      userDirs.publicShare = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Public";
+        description = "The Public share directory.";
+      };
+
+      userDirs.templates = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Templates";
+        description = "The Templates directory.";
+      };
+
+      userDirs.videos = lib.mkOption {
+        type = types.nullOr pathAsStr;
+        default = "$HOME/Videos";
+        description = "The Videos directory.";
+      };
+
+      userDirs.extraConfig = lib.mkOption {
+        type = types.attrsOf (pathAsStr);
+        default = { };
+        defaultText = lib.literalExpression "{ }";
+        example = lib.literalExpression ''
+          {
+            MISC = "$HOME/Misc";
+          }
+        '';
+        description = ''
+          Other user directories.
+
+          The key ‘MISC’ corresponds to the user-dirs entry ‘XDG_MISC_DIR’.
+        '';
+      };
+
+      userDirs.createDirectories = lib.mkEnableOption "automatic creation of the XDG user directories";
+
+      userDirs.setSessionVariables = lib.mkOption {
+        type = types.bool;
+        default = false;
+        description = ''
+          Whether to set the XDG user dir environment variables, like
+          `XDG_DESKTOP_DIR`.
+
+          ::: {.note}
+          The recommended way to get these values is via the `xdg-user-dir`
+          command or by processing `$XDG_CONFIG_HOME/user-dirs.dirs` directly in
+          your application.
+          :::
+        '';
+      };
     };
 
-    configHome = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/.config";
-      description = ''
-        Absolute path to directory holding application configurations.
+    config =
+      let
+        baseDirs = (
+          lib.filterAttrs (n: v: !isNull v) {
+            XDG_CACHE_HOME = config.baseDirs.cacheHome;
+            XDG_CONFIG_HOME = config.baseDirs.configHome;
+            XDG_DATA_HOME = config.baseDirs.dataHome;
+            XDG_STATE_HOME = config.baseDirs.stateHome;
+          }
+        );
 
-        Sets `XDG_CONFIG_HOME` for the user if `xdg.enable` is set `true`.
-      '';
-    };
+        userDirs =
+          (lib.filterAttrs (n: v: !isNull v) {
+            DESKTOP = config.userDirs.desktop;
+            DOCUMENTS = config.userDirs.documents;
+            DOWNLOAD = config.userDirs.download;
+            MUSIC = config.userDirs.music;
+            PICTURES = config.userDirs.pictures;
+            PUBLICSHARE = config.userDirs.publicShare;
+            TEMPLATES = config.userDirs.templates;
+            VIDEOS = config.userDirs.videos;
+          })
+          // config.userDirs.extraConfig;
 
-    dataHome = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/.local/share";
-      description = ''
-        Absolute path to directory holding application data.
+        # Allow runtime env-var expansion
+        esc-fn = wlib.escapeShellArgWithEnv;
 
-        Sets `XDG_DATA_HOME` for the user if `xdg.enable` is set `true`.
-      '';
-    };
+        baseDirsSessionVars = lib.mapAttrs (_k: v: {
+          data = v;
+          inherit esc-fn;
+        }) baseDirs;
 
-    stateHome = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/.local/state";
-      description = ''
-        Absolute path to directory holding application states.
+        userDirsSessionVars = lib.mapAttrs' (k: v: {
+          name = "XDG_${k}_DIR";
+          value = {
+            data = v;
+            inherit esc-fn;
+          };
+        }) userDirs;
+      in
+      {
+        env =
+          let
+            baseDirsEnabled = config.baseDirs.enable;
+            userDirsEnabled = config.userDirs.enable && config.userDirs.setSessionVariables;
+          in
+          (lib.optionalAttrs baseDirsEnabled baseDirsSessionVars)
+          // (lib.optionalAttrs userDirsEnabled userDirsSessionVars);
 
-        Sets `XDG_STATE_HOME` for the user if `xdg.enable` is set `true`.
-      '';
-    };
-  };
+        extraPackages = lib.mkIf config.userDirs.enable [
+          config.userDirs.package
+        ];
 
-  options.userDirs = {
-    enable = lib.mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        Whether to manage {file}`$XDG_CONFIG_HOME/user-dirs.dirs`.
+        runShell =
+          let
+            mkdir = (dir: ''[[ -L "${dir}" ]] || mkdir -p "${dir}"'');
+            createDirs = dirs: (lib.concatMapStringsSep "\n" mkdir (lib.attrValues dirs));
 
-        The generated file is read-only.
-      '';
-    };
+            createBaseDirs = createDirs baseDirs;
+            createUserDirs = createDirs userDirs;
+            createUserDirsConf = {
+              name = "CREATE_USER_DIRS_CONF";
+              data = ''
+                echo 'enabled=False' > "''${XDG_CONFIG_HOME}/user-dirs.conf"
+              '';
+            };
+            createUserDirsDirs = {
+              name = "CREATE_USER_DIRS_DIRS";
+              # TODO: Create `user-dirs.dirs`
+              data = ''
+                ???
+              '';
+            };
+          in [{
+            name = "XDG_SETUP";
+            data = lib.concatMapStringsSep "\n" mkdir (lib.attrValues userDirs);
+          }];
 
-    package = lib.mkPackageOption pkgs "xdg-user-dirs" { nullable = true; };
-
-    # Well-known directory list from
-    # https://gitlab.freedesktop.org/xdg/xdg-user-dirs/blob/master/man/user-dirs.dirs.xml
-
-    desktop = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Desktop";
-      description = "The Desktop directory.";
-    };
-
-    documents = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Documents";
-      description = "The Documents directory.";
-    };
-
-    download = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Downloads";
-      description = "The Downloads directory.";
-    };
-
-    music = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Music";
-      description = "The Music directory.";
-    };
-
-    pictures = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Pictures";
-      description = "The Pictures directory.";
-    };
-
-    publicShare = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Public";
-      description = "The Public share directory.";
-    };
-
-    templates = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Templates";
-      description = "The Templates directory.";
-    };
-
-    videos = lib.mkOption {
-      type = types.nullOr pathAsStr;
-      default = "$HOME/Videos";
-      description = "The Videos directory.";
-    };
-
-    extraConfig = lib.mkOption {
-      type = types.attrsOf (pathAsStr);
-      default = { };
-      defaultText = lib.literalExpression "{ }";
-      example = lib.literalExpression ''
-        {
-          MISC = "''${config.home.homeDirectory}/Misc";
-        }
-      '';
-      description = ''
-        Other user directories.
-
-        The key ‘MISC’ corresponds to the user-dirs entry ‘XDG_MISC_DIR’.
-      '';
-    };
-
-    createDirectories = lib.mkEnableOption "automatic creation of the XDG user directories";
-
-    setSessionVariables = lib.mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        Whether to set the XDG user dir environment variables, like
-        `XDG_DESKTOP_DIR`.
-
-        ::: {.note}
-        The recommended way to get these values is via the `xdg-user-dir`
-        command or by processing `$XDG_CONFIG_HOME/user-dirs.dirs` directly in
-        your application.
-        :::
-      '';
-    };
-  };
-
-  # config = let
-  #   baseDirs = {
-  #     XDG_CACHE_HOME = config.cacheHome;
-  #     XDG_CONFIG_HOME = config.configHome;
-  #     XDG_DATA_HOME = config.dataHome;
-  #     XDG_STATE_HOME = config.stateHome;
-  #   };
-  # in {
-  # };
-
-  config.package = pkgs.bashInteractive;
-  config.extraPackages = [
-    pkgs.xdg-user-dirs
-  ];
-  # config.flags = {
-  #   "-preset" = if config.profile == "fast" then "veryfast" else "slow";
-  # };
-  config.env = {
-    XDG_CACHE_HOME = {
-      data = "$HOME/.cache";
-      esc-fn = wlib.escapeShellArgWithEnv; # runtime env-var expansion
-    };
-    XDG_CONFIG_HOME = {
-      data = "$HOME/.config";
-      esc-fn = wlib.escapeShellArgWithEnv;
-    };
-    XDG_DATA_HOME = {
-      data = "$HOME/.local/share";
-      esc-fn = wlib.escapeShellArgWithEnv;
-    };
-    XDG_STATE_HOME = {
-      data = "$HOME/.local/state";
-      esc-fn = wlib.escapeShellArgWithEnv;
-    };
-
-    # XDG User Directories
-
-    XDG_DOWNLOAD_DIR = {
-      data = "$HOME/downloads";
-      esc-fn = wlib.escapeShellArgWithEnv;
-    };
-    XDG_PICTURES_DIR = {
-      data = "$HOME/pictures";
-      esc-fn = wlib.escapeShellArgWithEnv;
-    };
-  };
-
-  config.runShell = [{
-    name = "SETUP_CMD";
-    data = ''
-      [[ -L "''${XDG_CACHE_HOME}"   ]] || mkdir -p "''${XDG_CACHE_HOME}"
-      [[ -L "''${XDG_CONFIG_HOME}"  ]] || mkdir -p "''${XDG_CONFIG_HOME}"
-      [[ -L "''${XDG_DATA_HOME}"    ]] || mkdir -p "''${XDG_DATA_HOME}"
-      [[ -L "''${XDG_STATE_HOME}"   ]] || mkdir -p "''${XDG_STATE_HOME}"
-      [[ -L "''${XDG_DOWNLOAD_DIR}" ]] || mkdir -p "''${XDG_DOWNLOAD_DIR}"
-      [[ -L "''${XDG_PICTURES_DIR}" ]] || mkdir -p "''${XDG_PICTURES_DIR}"
-
-      echo 'enabled=False' > "''${XDG_CONFIG_HOME}/user-dirs.conf"
-
-      # TODO: Create `user-dirs.dirs`
-    '';
-  }];
-})).config.wrapper
-
+        # TODO: Remove Before Contributing
+        # pkgs = pkgs;
+        # TODO: Any shell works here
+        package = pkgs.bashInteractive;
+      };
+  }
+))
