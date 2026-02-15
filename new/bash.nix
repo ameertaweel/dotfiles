@@ -2,6 +2,7 @@
 
 (nix-wrapper-modules.lib.evalModule ({ config, wlib, lib, ... }: let
   types = lib.types;
+  pathAsStr = types.coercedTo types.path toString types.str;
 in {
   # You can only grab the final package if you supply pkgs!
   # But if you were making it for someone else, you would want them to do that!
@@ -18,9 +19,8 @@ in {
     enable = lib.mkEnableOption "management of XDG base directories";
 
     cacheHome = lib.mkOption {
-      type = types.path;
-      defaultText = "~/.cache";
-      apply = toString;
+      type = types.nullOr pathAsStr;
+      default = "$HOME/.cache";
       description = ''
         Absolute path to directory holding application caches.
 
@@ -29,9 +29,8 @@ in {
     };
 
     configHome = lib.mkOption {
-      type = types.path;
-      defaultText = "~/.config";
-      apply = toString;
+      type = types.nullOr pathAsStr;
+      default = "$HOME/.config";
       description = ''
         Absolute path to directory holding application configurations.
 
@@ -40,9 +39,8 @@ in {
     };
 
     dataHome = lib.mkOption {
-      type = types.path;
-      defaultText = "~/.local/share";
-      apply = toString;
+      type = types.nullOr pathAsStr;
+      default = "$HOME/.local/share";
       description = ''
         Absolute path to directory holding application data.
 
@@ -51,9 +49,8 @@ in {
     };
 
     stateHome = lib.mkOption {
-      type = types.path;
-      defaultText = "~/.local/state";
-      apply = toString;
+      type = types.nullOr pathAsStr;
+      default = "$HOME/.local/state";
       description = ''
         Absolute path to directory holding application states.
 
@@ -79,55 +76,55 @@ in {
     # https://gitlab.freedesktop.org/xdg/xdg-user-dirs/blob/master/man/user-dirs.dirs.xml
 
     desktop = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Desktop";
       description = "The Desktop directory.";
     };
 
     documents = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Documents";
       description = "The Documents directory.";
     };
 
     download = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Downloads";
       description = "The Downloads directory.";
     };
 
     music = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Music";
       description = "The Music directory.";
     };
 
     pictures = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Pictures";
       description = "The Pictures directory.";
     };
 
     publicShare = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Public";
       description = "The Public share directory.";
     };
 
     templates = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Templates";
       description = "The Templates directory.";
     };
 
     videos = lib.mkOption {
-      type = with types; nullOr (coercedTo path toString str);
+      type = types.nullOr pathAsStr;
       default = "$HOME/Videos";
       description = "The Videos directory.";
     };
 
     extraConfig = lib.mkOption {
-      type = with types; attrsOf (coercedTo path toString str);
+      type = types.attrsOf (pathAsStr);
       default = { };
       defaultText = lib.literalExpression "{ }";
       example = lib.literalExpression ''
@@ -145,8 +142,8 @@ in {
     createDirectories = lib.mkEnableOption "automatic creation of the XDG user directories";
 
     setSessionVariables = lib.mkOption {
-      type = with types; bool;
-      default = true;
+      type = types.bool;
+      default = false;
       description = ''
         Whether to set the XDG user dir environment variables, like
         `XDG_DESKTOP_DIR`.
@@ -160,15 +157,15 @@ in {
     };
   };
 
-  config = let
-    baseDirs = {
-      XDG_CACHE_HOME = config.cacheHome;
-      XDG_CONFIG_HOME = config.configHome;
-      XDG_DATA_HOME = config.dataHome;
-      XDG_STATE_HOME = config.stateHome;
-    };
-  in {
-  };
+  # config = let
+  #   baseDirs = {
+  #     XDG_CACHE_HOME = config.cacheHome;
+  #     XDG_CONFIG_HOME = config.configHome;
+  #     XDG_DATA_HOME = config.dataHome;
+  #     XDG_STATE_HOME = config.stateHome;
+  #   };
+  # in {
+  # };
 
   config.package = pkgs.bashInteractive;
   config.extraPackages = [
