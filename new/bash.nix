@@ -220,30 +220,30 @@
             mkdir = (dir: ''[[ -L "${dir}" ]] || mkdir -p "${dir}"'');
             createDirs = dirs: (lib.concatMapStringsSep "\n" mkdir (lib.attrValues dirs));
 
+            toKeyValue = pkgs.formats.keyValue {};
+
+            userDirsConf = pkgs.writeText "user-dirs.conf" "enabled=False";
+            userDirsDirs = let
+              # For some reason, these need to be wrapped with quotes to be valid.
+              wrapped = lib.mapAttrs' (k: v: {name = ''"${k}"''; value = v.data;}) userDirsSessionVars;
+            in toKeyValue.generate "user-dirs.dirs" wrapped;
+
             createBaseDirs = createDirs baseDirs;
             createUserDirs = createDirs userDirs;
-            createUserDirsConf = {
-              name = "CREATE_USER_DIRS_CONF";
-              data = ''
-                echo 'enabled=False' > "''${XDG_CONFIG_HOME}/user-dirs.conf"
-              '';
-            };
-            createUserDirsDirs = {
-              name = "CREATE_USER_DIRS_DIRS";
-              # TODO: Create `user-dirs.dirs`
-              data = ''
-                ???
-              '';
-            };
+            createUserDirsConf = "cp --no-preserve=all ${userDirsConf} \${XDG_CONFIG_HOME}/user-dirs.conf";
+            createUserDirsDirs = "cp --no-preserve=all ${userDirsDirs} \${XDG_CONFIG_HOME}/user-dirs.dirs";
           in [{
             name = "XDG_SETUP";
-            data = lib.concatMapStringsSep "\n" mkdir (lib.attrValues userDirs);
+            data = builtins.concatStringsSep "\n" [
+              (lib.optionalString config.baseDirs.enable createBaseDirs)
+              (lib.optionalString (config.userDirs.enable && config.userDirs.createDirectories) createUserDirs)
+              (lib.optionalString config.userDirs.enable createUserDirsConf)
+              (lib.optionalString config.userDirs.enable createUserDirsDirs)
+            ];
           }];
 
-        # TODO: Remove Before Contributing
-        # pkgs = pkgs;
-        # TODO: Any shell works here
-        package = pkgs.bashInteractive;
+        # NOTE: Any shell works here
+        package = lib.mkDefault pkgs.bashInteractive;
       };
   }
 ))
