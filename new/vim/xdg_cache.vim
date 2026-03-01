@@ -9,14 +9,20 @@ function EnsureDir(dir)
 endfunction
 
 " Base cache directory
-let s:vim_cache_dir = $XDG_CACHE_HOME . "/" . "vim"
+if !empty($XDG_CACHE_HOME)
+	let s:vim_cache_dir = $XDG_CACHE_HOME . "/" . "vim"
+else
+	let s:vim_cache_dir = $HOME . "/" . ".vim" . "/" . "cache"
+endif
 
 " Cache sub-directories
 let &viminfo .= "," . "n" . s:vim_cache_dir . "/" . "viminfo"
-let &directory = s:vim_cache_dir . "/" . "swap"
-let &backupdir = s:vim_cache_dir . "/" . "backup"
-let &undodir = s:vim_cache_dir . "/" . "undo"
 let g:netrw_home = s:vim_cache_dir . "/" . "netrw"
+" Directories ending in two path separators ensure unique file names.
+" Read more via `:h 'directory'`
+let &directory = s:vim_cache_dir . "/" . "swap" . "//"
+let &backupdir = s:vim_cache_dir . "/" . "backup" . "//"
+let &undodir = s:vim_cache_dir . "/" . "undo" . "//"
 
 " Ensure all directories exist
 call EnsureDir(s:vim_cache_dir)
