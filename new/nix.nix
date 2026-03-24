@@ -14,6 +14,14 @@
 
       # Automatically pick UIDs for builds, rather than creating nixbld* user accounts
       auto-allocate-uids = true;
+
+      # Flag problematic path and URL literals
+      # Helps avoid non-portable builds
+      lint-url-literals = "fatal";
+      # TODO: Set to `fatal` after eliminating all warnings.
+      lint-short-path-literals = "warn";
+      # TODO: Set to `fatal` after eliminating all warnings.
+      lint-absolute-path-literals = "warn";
     };
 
     # Auto garbage-collection to save disk space
