@@ -19,6 +19,8 @@
       pkgs.zip
       pkgs.unzip
       pkgs.jq
+
+      pkgs.firefox
     ];
     shell = pkgs.bash;
   };
