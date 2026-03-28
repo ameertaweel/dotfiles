@@ -38,6 +38,10 @@
     package = pkgs.mariadb;
   };
   services.redis.servers."".enable = true;
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_18;
+  };
 
   services.guix = {
     enable = true;
