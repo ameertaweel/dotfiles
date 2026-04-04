@@ -3,10 +3,11 @@
 "nixpkgs":{"kd":[1,{"ft":0,"ur":"https://releases.nixos.org/nixos/unstable/nixos-26.05pre972949.6201e203d095/nixexprs.tar.xz","ms":[]}],"ha":{"al":0,"vl":"sha256-ByAX1LkhCwZ94+KnFAmnJSMAvui7kgCxjHgUHsWAbfI="},"fv":"https://releases.nixos.org/nixos/unstable/nixos-26.05pre972949.6201e203d095","ps":["nixpkgs-pr"]}
 ,"nix-index-database":{"kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-index-database/archive/bc13aeaed568be76eab84df88ff39261bb52ff70.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-89Mh4Eb/5stVJX6kGagVMijcU2FmfeD8Qv7UXc5d92o="},"fv":"bc13aeaed568be76eab84df88ff39261bb52ff70","ps":[]}
 ,"nix-jetbrains-plugins":{"kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-jetbrains-plugins/archive/546cfbddead4789f76ff77b7751de30a3f4c6ef5.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-kPR2oxUgJdYlgfxj91RrbMahIhvLfjHCLo+YIkwa2ZE="},"fv":"546cfbddead4789f76ff77b7751de30a3f4c6ef5","ps":[]}
-,"nix-maid":{"kd":[1,{"ft":0,"ur":"https://github.com/viperML/nix-maid/archive/94259df69180276c61f7471de8baab66097b7600.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-0S7sy0+02s0tWHkjgzMGI2oVVk7GTWsVOxeJGH+2EjU="},"fv":"94259df69180276c61f7471de8baab66097b7600","ps":[]}
+,"nix-maid":{"kd":[1,{"ft":0,"ur":"https://github.com/viperML/nix-maid/archive/94259df69180276c61f7471de8baab66097b7600.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-0S7sy0+02s0tWHkjgzMGI2oVVk7GTWsVOxeJGH+2EjU="},"fv":"94259df69180276c61f7471de8baab66097b7600","ps":["nix-maid-pr"]}
 ,"nix-wrapper-modules":{"kd":[1,{"ft":0,"ur":"https://github.com/BirdeeHub/nix-wrapper-modules/archive/708dd619b5096f93c55ccef25af9cae5e57d4190.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-cuZPzxukS5ywr7W2QXhkaXamDUHGwea9Rho5I/4zvBM="},"fv":"708dd619b5096f93c55ccef25af9cae5e57d4190","ps":[]}
 }
 ,"p":{
 "nixpkgs-pr":{"ur":"https://github.com/NixOS/nixpkgs/pull/503179.patch","ha":{"al":0,"vl":"sha256-lhqQgtFYfOIp/1bvF1Kd5J8CpVcaBUvTlU/EDuWRE14="}}
+,"nix-maid-pr":{"ur":"https://github.com/ameertaweel/nix-maid/commit/568d20994fb659a1a48814e9838e824289a20e73.patch","ha":{"al":0,"vl":"sha256-XXm2oKH+jQbA4az4kw3etwwAMdROKU+Q9LOhCfhkrLI="}}
 }
 }
