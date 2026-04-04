@@ -3,9 +3,10 @@
 // ╹┗┛╹╱ ╹ ╹ ╹╹╹ ╹╹╹┗┛  $ man nixtamal-manifest
 version "1.0.0"
 
-// patches {
-// 	nix-maid-pr "https://github.com/ameertaweel/nix-maid/commit/12ec5d22e150df353c3af63833b07ed50a11b679.patch"
-// }
+patches {
+	// nix-maid-pr "https://github.com/ameertaweel/nix-maid/commit/12ec5d22e150df353c3af63833b07ed50a11b679.patch"
+	nixpkgs-pr "https://github.com/NixOS/nixpkgs/pull/503179.patch"
+}
 
 inputs {
 	nixpkgs {
@@ -16,6 +17,7 @@ inputs {
 		fresh-cmd {
 			$ curl -Ls --http2 --compressed -o "/dev/null" -w "%{url_effective}" "https://channels.nixos.org/nixos-unstable"
 		}
+		patches nixpkgs-pr
 	}
 
 	nix-index-database {

@@ -18,8 +18,7 @@
       # Flag problematic path and URL literals
       # Helps avoid non-portable builds
       lint-url-literals = "fatal";
-      # TODO: Set to `fatal` after eliminating all warnings.
-      lint-short-path-literals = "warn";
+      lint-short-path-literals = "fatal";
       # TODO: Set to `fatal` after eliminating all warnings.
       lint-absolute-path-literals = "warn";
     };
