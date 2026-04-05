@@ -4,7 +4,7 @@
 version "1.0.0"
 
 patches {
-	nix-maid-pr "https://github.com/ameertaweel/nix-maid/commit/568d20994fb659a1a48814e9838e824289a20e73.patch"
+	nix-maid-pr "https://github.com/ameertaweel/nix-maid/commit/d7efadad0e25bf3bacdca687692f60d2e022e748.patch"
 	nixpkgs-pr "https://github.com/NixOS/nixpkgs/pull/503179.patch"
 }
 

@@ -197,10 +197,9 @@ let
       # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
       system.stateVersion = stateVersion; # Did you read the comment?
     };
-
-  nixos = import (nixpkgsChannel + "/nixos") {
+in {
+  myHost = import (nixpkgsChannel + "/nixos") {
     inherit configuration;
     system = null;
   };
-in
-nixos
+}

@@ -8,6 +8,6 @@
 }
 ,"p":{
 "nixpkgs-pr":{"ur":"https://github.com/NixOS/nixpkgs/pull/503179.patch","ha":{"al":0,"vl":"sha256-lhqQgtFYfOIp/1bvF1Kd5J8CpVcaBUvTlU/EDuWRE14="}}
-,"nix-maid-pr":{"ur":"https://github.com/ameertaweel/nix-maid/commit/568d20994fb659a1a48814e9838e824289a20e73.patch","ha":{"al":0,"vl":"sha256-XXm2oKH+jQbA4az4kw3etwwAMdROKU+Q9LOhCfhkrLI="}}
+,"nix-maid-pr":{"ur":"https://github.com/ameertaweel/nix-maid/commit/d7efadad0e25bf3bacdca687692f60d2e022e748.patch","ha":{"al":0,"vl":"sha256-A2zVE0m5wXpsZytgC4gDNVxQ0bH+/ga1CxkinTR25qI="}}
 }
 }
