@@ -18,5 +18,6 @@
     ./jetbrains
     ./inputs.nix
     ./cli-essentials.nix
+    ./user-env-vars.nix
   ];
 }

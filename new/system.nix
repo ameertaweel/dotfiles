@@ -131,6 +131,9 @@ let
           dockerUser = true;
           podmanUser = true;
           virtualBoxUser = false;
+          sessionVariables = {
+            EDITOR = "vim";
+          };
 
           anydesk.enable = true;
           programs.jetbrains.pycharm.enable = true;
