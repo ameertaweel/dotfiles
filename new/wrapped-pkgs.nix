@@ -14,8 +14,9 @@ in {
   bash = (import ./bash.nix { inherit nix-wrapper-modules; }).config.wrap({...}: {
     config.pkgs = pkgs;
 
-    config.baseDirs.enable = true;
-    config.userDirs.enable = true;
-    config.userDirs.setSessionVariables = true;
+    config.bashrc = ''
+      export HISTCONTROL='ignoredups:erasedups'
+      set -o vi
+    '';
   });
 }
