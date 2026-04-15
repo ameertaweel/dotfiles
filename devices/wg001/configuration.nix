@@ -35,7 +35,7 @@
 
   services.mysql = {
     enable = true;
-    package = pkgs.mariadb;
+    package = pkgs.mysql84;
   };
   services.redis.servers."".enable = true;
   services.postgresql = {
