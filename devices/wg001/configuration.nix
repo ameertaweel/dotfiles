@@ -1,4 +1,5 @@
 {
+  lib,
   params,
   pkgs,
   ...
@@ -21,9 +22,14 @@
       pkgs.jq
 
       pkgs.firefox
+      pkgs.android-studio
     ];
     shell = pkgs.bash;
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "android-studio"
+  ];
 
   networking.hostName = params.hostname;
 
