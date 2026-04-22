@@ -1,8 +1,6 @@
-{nix-wrapper-modules, pkgs}:
+{nix-wrapper-modules, ...}:
 
-nix-wrapper-modules.wrappers.tealdeer.wrap ({ ... }: {
-  inherit pkgs;
-
+nix-wrapper-modules.wrappers.tealdeer.apply ({ ... }: {
   settings = {
     search = {
       languages = ["en"];

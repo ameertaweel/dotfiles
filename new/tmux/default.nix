@@ -1,8 +1,6 @@
-{nix-wrapper-modules, pkgs}:
+{nix-wrapper-modules, ...}:
 
-nix-wrapper-modules.wrappers.tmux.wrap ({ ... }: {
-  inherit pkgs;
-
+nix-wrapper-modules.wrappers.tmux.apply ({ ... }: {
   configAfter = ''
     # Keybindings
     source-file ${./keybindings.tmux}

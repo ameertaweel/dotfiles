@@ -1,8 +1,6 @@
-{nix-wrapper-modules, pkgs}:
+{nix-wrapper-modules, ...}:
 
-nix-wrapper-modules.wrappers.vim.wrap ({ ... }: {
-  inherit pkgs;
-
+nix-wrapper-modules.wrappers.vim.apply ({ pkgs, ... }: {
   vimrc = ''
     " Use Vim settings rather than Vi settings
     set nocompatible

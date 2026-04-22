@@ -1,8 +1,6 @@
-{nix-wrapper-modules, pkgs}:
+{nix-wrapper-modules, ...}:
 
-nix-wrapper-modules.wrappers.wezterm.wrap ({ ... }: {
-  inherit pkgs;
-
+nix-wrapper-modules.wrappers.wezterm.apply ({ pkgs, ... }: {
   "wezterm.lua".path = ./wezterm.lua;
 
   # Colon-separated list of font dirs
