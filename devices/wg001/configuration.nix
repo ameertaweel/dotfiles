@@ -25,7 +25,11 @@
       pkgs.android-studio
     ];
     shell = pkgs.bash;
+    extraGroups = ["adbusers"];
   };
+
+  # ADB
+  environment.systemPackages = [ pkgs.android-tools ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "android-studio"
