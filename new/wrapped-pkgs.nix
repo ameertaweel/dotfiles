@@ -26,6 +26,7 @@ in {
 
     config.bashrc = ''
       export HISTCONTROL='ignoredups:erasedups'
+      export HISTIGNORE='exit:exit *'
       set -o vi
     '';
   });

@@ -18,6 +18,7 @@
     ./jetbrains
     ./inputs.nix
     ./cli-essentials.nix
+    ./bash-module.nix
     ./user-env-vars.nix
   ];
 }

@@ -108,12 +108,6 @@ let
           "networkmanager"
           "wheel"
         ]; # Enable ‘sudo’ for the user.
-        shell = let
-          wrappedPkgs = import ./wrapped-pkgs.nix {
-            inherit pkgs;
-            inherit (config.custom.inputs) nix-wrapper-modules;
-          };
-        in "${wrappedPkgs.bash}/bin/bash";
         packages = let
           wrappedPkgs = import ./wrapped-pkgs.nix {
             inherit pkgs;
@@ -123,7 +117,6 @@ let
           pkgs.brave
           pkgs.vlc
           wrappedPkgs.wezterm
-          wrappedPkgs.bash
         ];
         password = "labmem001";
         custom = {
@@ -133,6 +126,9 @@ let
           virtualBoxUser = false;
           sessionVariables = {
             EDITOR = "vim";
+          };
+          bash = {
+            enable = true;
           };
 
           anydesk.enable = true;
