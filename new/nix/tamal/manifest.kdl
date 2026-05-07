@@ -1,7 +1,7 @@
 // ┏┓╻+╻ ╱┏┳┓┏┓┏┳┓┏┓╻
 // ┃┃┃┃┗━┓╹┃╹┣┫┃┃┃┣┫┃   Read the manpage:
 // ╹┗┛╹╱ ╹ ╹ ╹╹╹ ╹╹╹┗┛  $ man nixtamal-manifest
-version "1.0.0"
+version "1.1.0"
 
 patches {
 	nix-maid-pr "https://github.com/ameertaweel/nix-maid/commit/d7efadad0e25bf3bacdca687692f60d2e022e748.patch"
@@ -17,7 +17,7 @@ inputs {
 		fresh-cmd {
 			$ curl -Ls --http2 --compressed -o "/dev/null" -w "%{url_effective}" "https://channels.nixos.org/nixos-unstable"
 		}
-		patches nixpkgs-pr
+		// patches nixpkgs-pr
 	}
 
 	nix-index-database {

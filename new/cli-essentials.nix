@@ -26,16 +26,17 @@
     pkgs.entr  # Run arbitrary commands when files change
     pkgs.watch # Execute a command repeatedly, and monitor the output in full-screen mode
 
-    # TODO: Better place for those guys
-    wrappedPkgs.vim
-    pkgs.git
-
     wrappedPkgs.btop
     wrappedPkgs.tealdeer
     wrappedPkgs.tmux
+
+    # TODO: Better place for those guys
+    wrappedPkgs.vim
+    pkgs.git
   ];
 
   programs.htop.enable = true;
 
-  nixpkgs.config.allowUnfreePackages = [ "rar" ];
+  # TODO: Move Vim plugins into a Vim module
+  nixpkgs.config.allowUnfreePackages = [ "rar" "vim-windowswap" "vim-polyglot" ];
 }
