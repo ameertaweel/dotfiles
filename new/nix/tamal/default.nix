@@ -117,7 +117,7 @@ let
 					else
 						throw "Unsupported fetch time ${fetch_time}."
 				else
-					throw "Unsupported input kind “${builtins.toString}”.";
+					throw "Unsupported input kind “${builtins.toString k}”.";
 		in
 		raw-input;
 in
