@@ -193,13 +193,8 @@ Copy game files.
   winget install ElectronicArts.EADesktop
   ```
 - Install Command and Conquer Generals Zero Hour from the EA App.
-- Download GenPatcher executable from:
-  https://legi.cc/genpatcher
-- Run GenPatcher.
-- Apply Fixes.
-- Install GenTool.
-- Install Community Map Pack.
-- Install Radmin VPN.
+- Install the community online patch:
+  https://www.playgenerals.online
 
 ## Install WSL (Windows Subsystem for Linux)
 
