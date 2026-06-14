@@ -126,6 +126,7 @@ let
           virtualBoxUser = false;
           sessionVariables = {
             EDITOR = "vim";
+            PAGER = "less";
           };
           bash = {
             enable = true;
