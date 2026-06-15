@@ -24,31 +24,9 @@ in {
   bash = (import ./bash.nix { inherit nix-wrapper-modules; }).config.wrap({...}: {
     config.pkgs = pkgs;
 
+    # TODO: Check bashrc with shellcheck
     config.bashrc = ''
-      if [ -f "$HOME/.profile" ]; then
-        . "$HOME/.profile"
-      fi
-
-      # ignorespace: lines which begin with a space character are not saved in the history list
-      export HISTCONTROL='ignoredups:erasedups:ignorespace'
-      export HISTIGNORE='cd:cd *:ls:ls *:exit:exit *'
-      set -o vi
-
-      set -o noclobber
-
-      shopt -s histappend
-      shopt -s autocd
-
-      # Prefix a command with '\' to ignore aliases (e.g. \ls)
-      alias ls='ls -lah --color=auto --group-directories-first'
-      alias rm='rm --interactive --preserve-root'
-      alias cp='cp --interactive'
-      alias mv='mv --interactive'
-      alias mkdir='mkdir --parents --verbose'
-      alias ping='ping -c 5'
-      alias grep='grep --color=auto'
-      alias egrep='egrep --color=auto'
-      alias fgrep='fgrep --color=auto'
+      . ${./bashrc.sh}
     '';
   });
 }
