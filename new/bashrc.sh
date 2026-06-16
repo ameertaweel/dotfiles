@@ -1,4 +1,8 @@
 if [ -f "${HOME}/.profile" ]; then
+	# ShellCheck fails without the directive below
+	# https://www.shellcheck.net/wiki/SC1091
+
+	# shellcheck source=/dev/null
 	. "${HOME}/.profile"
 fi
 
@@ -28,9 +32,6 @@ PROMPT_COMMAND=__prompt_command
 __prompt_command() {
 	local LAST_EXIT_CODE="${?}" # This needs to be first
 
-	local IN_GIT_WORK_TREE
-	IN_GIT_WORK_TREE="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
-
 	PS1=''
 
 	local COLOR_RESET='\[\e[0m\]'
@@ -41,19 +42,25 @@ __prompt_command() {
 
 	local PROMPT_TIME="${COLOR_YELLOW}[\t]${COLOR_RESET}"
 	local PROMPT_USER="${COLOR_GREEN}\u${COLOR_RESET}"
-	local PROMPT_HOST="${COLOR_BLUE}\H${COLOR_RESET}"
+	local PROMPT_HOST="\H"
 	local PROMPT_USER_HOST="${PROMPT_USER}@${PROMPT_HOST}"
-	local PROMPT_CWD="\w"
+	local PROMPT_CWD="${COLOR_BLUE}\w${COLOR_RESET}"
 
 	local PROMPT_FIRST_LINE="${PROMPT_TIME} ${PROMPT_USER_HOST} ${PROMPT_CWD}"
 
-	local GIT_BRANCH
-	if [ "${IN_GIT_WORK_TREE}" = "true" ]; then
-		GIT_BRANCH="$(git branch --show-current)"
-		PROMPT_FIRST_LINE+=" (${GIT_BRANCH})"
-	elif [ "${IN_GIT_WORK_TREE}" = "false" ]; then
-		GIT_BRANCH="GIT_DIR!"
-		PROMPT_FIRST_LINE+=" (${GIT_BRANCH})"
+	# Add the current Git branch when Git is available
+	if command -v git >/dev/null 2>&1; then
+		local IN_GIT_WORK_TREE
+		IN_GIT_WORK_TREE="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
+
+		local GIT_BRANCH
+		if [ "${IN_GIT_WORK_TREE}" = "true" ]; then
+			GIT_BRANCH="$(git branch --show-current)"
+			PROMPT_FIRST_LINE+=" (${GIT_BRANCH})"
+		elif [ "${IN_GIT_WORK_TREE}" = "false" ]; then
+			GIT_BRANCH="GIT_DIR!"
+			PROMPT_FIRST_LINE+=" (${GIT_BRANCH})"
+		fi
 	fi
 
 	if [ "${SHLVL}" != 1 ]; then

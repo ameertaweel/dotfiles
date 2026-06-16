@@ -52,6 +52,10 @@
         content = config.bashrc;
         relPath = "${config.binName}rc";
         output = config.configDrvOutput;
+        builder = ''
+          ${lib.getExe pkgs.shellcheck-minimal} --shell bash --severity=style "$1"
+          cp "$1" "$2"
+        '';
       };
     };
   }

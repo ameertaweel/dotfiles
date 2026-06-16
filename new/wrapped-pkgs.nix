@@ -23,10 +23,6 @@ in {
   });
   bash = (import ./bash.nix { inherit nix-wrapper-modules; }).config.wrap({...}: {
     config.pkgs = pkgs;
-
-    # TODO: Check bashrc with shellcheck
-    config.bashrc = ''
-      . ${./bashrc.sh}
-    '';
+    config.bashrc = builtins.readFile ./bashrc.sh;
   });
 }
