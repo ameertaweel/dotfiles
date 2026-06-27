@@ -28,7 +28,7 @@ OF THIS SOFTWARE.
 }:
 
 let lock = builtins.fromJSON (builtins.readFile ./lock.json); in
-assert (lock.v == "1.1.0");
+assert (lock.v == "1.2.0");
 let
 	hash-token = {
 		"0" = "sha256";
@@ -117,7 +117,7 @@ let
 					else
 						throw "Unsupported fetch time ${fetch_time}."
 				else
-					throw "Unsupported input kind “${builtins.toString}”.";
+					throw "Unsupported input kind “${builtins.toString k}”.";
 		in
 		raw-input;
 in

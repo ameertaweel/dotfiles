@@ -1,10 +1,10 @@
-{"v":"1.1.0"
+{"v":"1.2.0"
 ,"i":{
-"nixpkgs":{"sn":"nixpkgs-src","kd":[1,{"ft":0,"ur":"https://releases.nixos.org/nixos/unstable/nixos-26.11pre1014179.9ae611a455b9/nixexprs.tar.xz","ms":[]}],"ha":{"al":0,"vl":"sha256-rNDJzV2JTV5SUTwv1cgKZYMdyoUYU9/YfegSaUf3QfY="},"fv":"https://releases.nixos.org/nixos/unstable/nixos-26.11pre1014179.9ae611a455b9","ps":[]}
-,"nix-index-database":{"sn":"nix-index-database-src","kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-index-database/archive/1a2ea89c917781e88508d9fd2b507f2d2a0e173c.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-0BYqs8yKWkOz2Q7+SP18N5E5gmDKSo6LSxIVIa0wWes="},"fv":"1a2ea89c917781e88508d9fd2b507f2d2a0e173c","ps":[]}
-,"nix-jetbrains-plugins":{"sn":"nix-jetbrains-plugins-src","kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-jetbrains-plugins/archive/bae5228a91aeb509e5e3053f9274189f900252dc.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-17btxePnVyGjeYlQ6C6Jvc/X9Rn4NfxhQypx0eYwzHk="},"fv":"bae5228a91aeb509e5e3053f9274189f900252dc","ps":[]}
+"nixpkgs":{"sn":"nixpkgs-src","kd":[1,{"ft":0,"ur":"https://releases.nixos.org/nixos/unstable/nixos-26.11pre1022855.e73de5be04e0/nixexprs.tar.xz","ms":[]}],"ha":{"al":0,"vl":"sha256-inDx/w70OSJoJPqtKh0BrzAsbZZhpya7YgS43jHnhwg="},"fv":"https://releases.nixos.org/nixos/unstable/nixos-26.11pre1022855.e73de5be04e0","ps":[]}
+,"nix-index-database":{"sn":"nix-index-database-src","kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-index-database/archive/3017088b49efd404f78e3b104f553b97e4af786b.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-h4WpMr455AfRub0FXBaon6Vcpe0waUyJ4GivIW6oyd4="},"fv":"3017088b49efd404f78e3b104f553b97e4af786b","ps":[]}
+,"nix-jetbrains-plugins":{"sn":"nix-jetbrains-plugins-src","kd":[1,{"ft":0,"ur":"https://github.com/nix-community/nix-jetbrains-plugins/archive/61b33741fbd03eaa687c2c5b74c29a8d5fedcd68.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-sF0Iqrx3P2y0LNg5q+1g+DR07r9BA9FmHMo0GVk5A3Y="},"fv":"61b33741fbd03eaa687c2c5b74c29a8d5fedcd68","ps":[]}
 ,"nix-maid":{"sn":"nix-maid-src","kd":[1,{"ft":0,"ur":"https://github.com/viperML/nix-maid/archive/993d95a0a5b2f4b06faa022b32112b699ca3bbfd.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-pLCCqY/0JC7QdWqyEyDEvGl63f9aS8zrFLVJW7gUMKI="},"fv":"993d95a0a5b2f4b06faa022b32112b699ca3bbfd","ps":[]}
-,"nix-wrapper-modules":{"sn":"nix-wrapper-modules-src","kd":[1,{"ft":0,"ur":"https://github.com/BirdeeHub/nix-wrapper-modules/archive/8dd304c3582ddd339217e1cc5fb53f50acb63c2d.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-3F5DixT3Gk91lBI9E+TGMm0ko5HrRbDiL23di16TJGA="},"fv":"8dd304c3582ddd339217e1cc5fb53f50acb63c2d","ps":[]}
+,"nix-wrapper-modules":{"sn":"nix-wrapper-modules-src","kd":[1,{"ft":0,"ur":"https://github.com/BirdeeHub/nix-wrapper-modules/archive/6e7f66fa2cdf4d63162580b438f7fcf87c28a46f.tar.gz","ms":[]}],"ha":{"al":0,"vl":"sha256-vAmbArdCyjqpVW+37aCy/PMBOLIqukUXLQuEKLwUhA4="},"fv":"6e7f66fa2cdf4d63162580b438f7fcf87c28a46f","ps":[]}
 }
 ,"p":{}
 }
