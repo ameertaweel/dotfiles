@@ -1,7 +1,8 @@
 {
   params,
   ...
-}: {
+}:
+{
   # TODO: Import From `../../modules/home-manager/core.nix` [START]
 
   # Enable home-manager

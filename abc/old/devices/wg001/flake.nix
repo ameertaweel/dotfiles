@@ -16,40 +16,43 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    params = {
-      hostname = "wg001";
-      username = "nixos";
-      system = "x86_64-linux";
-      state-version = "24.11";
-      editor = "vim";
-      pdf-reader = "zathura";
-    };
-  in {
-    # NixOS configuration entrypoint
-    # Available through `nixos-rebuild --flake .#your-hostname`
-    nixosConfigurations.${params.hostname} = inputs.nixpkgs.lib.nixosSystem {
-      inherit (params) system;
-      specialArgs = {inherit inputs outputs params;};
-      modules = [
-        ./wsl.nix
-        ./configuration.nix
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      params = {
+        hostname = "wg001";
+        username = "nixos";
+        system = "x86_64-linux";
+        state-version = "24.11";
+        editor = "vim";
+        pdf-reader = "zathura";
+      };
+    in
+    {
+      # NixOS configuration entrypoint
+      # Available through `nixos-rebuild --flake .#your-hostname`
+      nixosConfigurations.${params.hostname} = inputs.nixpkgs.lib.nixosSystem {
+        inherit (params) system;
+        specialArgs = { inherit inputs outputs params; };
+        modules = [
+          ./wsl.nix
+          ./configuration.nix
 
-        {
-          imports = [
-            inputs.home-manager.nixosModules.home-manager
-          ];
-          # home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${params.username} = import ./home.nix;
-          home-manager.extraSpecialArgs = {inherit inputs outputs params;};
-        }
-      ];
+          {
+            imports = [
+              inputs.home-manager.nixosModules.home-manager
+            ];
+            # home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${params.username} = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs outputs params; };
+          }
+        ];
+      };
     };
-  };
 }

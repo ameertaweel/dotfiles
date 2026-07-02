@@ -4,7 +4,8 @@
   params,
   pkgs,
   ...
-}: let
+}:
+let
   nvim-themes = {
     ayu-dark = {
       # https://github.com/Shatur/neovim-ayu
@@ -42,11 +43,18 @@
     };
   };
   nvim-theme = nvim-themes.${config.colorScheme.slug};
-in {
-  home.sessionVariables = lib.mkIf (builtins.elem params.editor ["nvim" "neovim"]) {
-    EDITOR = "nvim";
-    MANPAGER = "nvim +Man!";
-  };
+in
+{
+  home.sessionVariables =
+    lib.mkIf
+      (builtins.elem params.editor [
+        "nvim"
+        "neovim"
+      ])
+      {
+        EDITOR = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
 
   programs.neovim = {
     enable = true;

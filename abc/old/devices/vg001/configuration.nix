@@ -2,7 +2,8 @@
   params,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware.nix
     ./impermanence.nix
@@ -15,9 +16,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Workaround because console defaults to serial
-  boot.kernelParams = ["console=tty"];
+  boot.kernelParams = [ "console=tty" ];
   # Initialize the display early to get a complete log
-  boot.initrd.kernelModules = ["virtio_gpu"];
+  boot.initrd.kernelModules = [ "virtio_gpu" ];
 
   networking.hostName = params.hostname;
 
@@ -45,7 +46,7 @@
   users.users.${params.username} = {
     isNormalUser = true;
     description = params.name;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     shell = pkgs.${params.shell};
     # echo "PASSWORD" | mkpasswd -s
     hashedPasswordFile = "/persist/run/secrets/${params.username}-hashed-pwd";

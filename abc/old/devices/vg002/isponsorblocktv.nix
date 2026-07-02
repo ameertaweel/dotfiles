@@ -2,18 +2,21 @@
   version,
   persistDir ? null,
   ...
-}: {
+}:
+{
   pkgs,
   lib,
   outputs,
   ...
-}: let
+}:
+let
   stateDir = "isponsorblocktv";
   baseDir = "/var/lib/${stateDir}";
   package = pkgs.isponsorblocktv;
   user = "isponsorblocktv";
   group = "isponsorblocktv";
-in {
+in
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "iSponsorBlockTV";
@@ -29,8 +32,8 @@ in {
   systemd.services.isponsorblocktv = {
     description = "SponsorBlock client for all YouTube TV clients";
 
-    wantedBy = ["multi-user.target"];
-    after = ["network.target"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
 
     serviceConfig = {
       ExecStart = "${package}/bin/iSponsorBlockTV -d ${baseDir}";
@@ -53,7 +56,7 @@ in {
     };
   };
 
-  users.groups.${group} = {};
+  users.groups.${group} = { };
   users.users.${user} = {
     isSystemUser = true;
     inherit group;

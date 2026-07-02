@@ -2,9 +2,11 @@
   lib,
   params,
   ...
-}: let
-  ifDefault = lib.mkIf (builtins.elem params.pdf-reader ["zathura"]);
-in {
+}:
+let
+  ifDefault = lib.mkIf (builtins.elem params.pdf-reader [ "zathura" ]);
+in
+{
   # Zathura
   # Highly customizable and functional document viewer focused on keyboard
   # interaction.

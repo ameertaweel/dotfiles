@@ -5,14 +5,17 @@
   environmentFile,
   persistDir ? null,
   ...
-}: {
+}:
+{
   config,
   lib,
   outputs,
   ...
-}: let
+}:
+let
   baseDir = "/var/lib/private/ntfy-sh";
-in {
+in
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "Ntfy";
@@ -58,6 +61,6 @@ in {
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = [baseDir];
+    ${persistDir}.directories = [ baseDir ];
   };
 }

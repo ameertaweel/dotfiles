@@ -3,11 +3,13 @@
   version,
   domain,
   ...
-}: {
+}:
+{
   config,
   outputs,
   ...
-}: {
+}:
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "Stirling PDF";

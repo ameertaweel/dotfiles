@@ -1,6 +1,6 @@
-{lib, ...}: {
+{ lib, ... }: {
   specialisation.headless.configuration = {
-    system.nixos.tags = ["headless"];
+    system.nixos.tags = [ "headless" ];
 
     # Disable the X11 windowing system
     services.xserver.enable = lib.mkForce false;

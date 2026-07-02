@@ -4,11 +4,13 @@
   version,
   environmentFile,
   ...
-}: {
+}:
+{
   config,
   outputs,
   ...
-}: {
+}:
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "Miniflux";
@@ -55,5 +57,5 @@
   # Periodic Backup                                                            #
   ##############################################################################
 
-  services.postgresqlBackup.databases = ["miniflux"];
+  services.postgresqlBackup.databases = [ "miniflux" ];
 }

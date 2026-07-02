@@ -108,16 +108,18 @@ let
           "networkmanager"
           "wheel"
         ]; # Enable ‘sudo’ for the user.
-        packages = let
-          wrappedPkgs = import ./wrapped-pkgs.nix {
-            inherit pkgs;
-            inherit (config.custom.inputs) nix-wrapper-modules;
-          };
-        in [
-          pkgs.brave
-          pkgs.vlc
-          wrappedPkgs.wezterm
-        ];
+        packages =
+          let
+            wrappedPkgs = import ./wrapped-pkgs.nix {
+              inherit pkgs;
+              inherit (config.custom.inputs) nix-wrapper-modules;
+            };
+          in
+          [
+            pkgs.brave
+            pkgs.vlc
+            wrappedPkgs.wezterm
+          ];
         password = "labmem001";
         custom = {
           adbUser = true;
@@ -197,7 +199,8 @@ let
       # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
       system.stateVersion = stateVersion; # Did you read the comment?
     };
-in {
+in
+{
   myHost = import (nixpkgsChannel + "/nixos") {
     inherit configuration;
     system = null;

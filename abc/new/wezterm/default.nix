@@ -1,10 +1,12 @@
-{nix-wrapper-modules, ...}:
+{ nix-wrapper-modules, ... }:
 
-nix-wrapper-modules.wrappers.wezterm.apply ({ pkgs, ... }: {
-  "wezterm.lua".path = ./wezterm.lua;
+nix-wrapper-modules.wrappers.wezterm.apply (
+  { pkgs, ... }: {
+    "wezterm.lua".path = ./wezterm.lua;
 
-  # Colon-separated list of font dirs
-  env.WEZTERM_CUSTOM_FONT_DIRS = builtins.concatStringsSep ":" [
-    "${pkgs.nerd-fonts.hack}"
-  ];
-})
+    # Colon-separated list of font dirs
+    env.WEZTERM_CUSTOM_FONT_DIRS = builtins.concatStringsSep ":" [
+      "${pkgs.nerd-fonts.hack}"
+    ];
+  }
+)

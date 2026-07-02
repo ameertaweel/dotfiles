@@ -6,15 +6,18 @@
   environmentFile,
   persistDir ? null,
   ...
-}: {
+}:
+{
   config,
   lib,
   outputs,
   ...
-}: let
+}:
+let
   baseDir = "/var/lib/private/scrutiny";
   influxDB2BaseDir = "/var/lib/influxdb2";
-in {
+in
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "Scrutiny";
@@ -65,6 +68,9 @@ in {
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = [baseDir influxDB2BaseDir];
+    ${persistDir}.directories = [
+      baseDir
+      influxDB2BaseDir
+    ];
   };
 }

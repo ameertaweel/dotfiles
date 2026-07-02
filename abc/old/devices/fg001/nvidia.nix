@@ -1,14 +1,16 @@
-{...}: let
+{ ... }:
+let
   intelBusId = "PCI:0:2:0";
   nvidiaBusId = "PCI:1:0:0";
-in {
+in
+{
   specialisation.nvidia-enabled.configuration = {
-    system.nixos.tags = ["nvidia-enabled"];
+    system.nixos.tags = [ "nvidia-enabled" ];
 
     # Nvidia drivers are unfree
-    imports = [../../modules/nixpkgs-unfree.nix];
+    imports = [ ../../modules/nixpkgs-unfree.nix ];
 
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
       open = false;

@@ -1,5 +1,8 @@
+{ }:
 let
   sources = import ./tamal { };
+
+  overlays = import ./overlays;
 
   pkgs = import sources.nixpkgs {
     config.allowUnfree = false;
@@ -9,7 +12,5 @@ let
       overlays.additions
     ];
   };
-
-  overlays = import ./overlays;
 in
 pkgs

@@ -5,17 +5,29 @@
   pkgs,
   params,
   ...
-}: let
+}:
+let
   modules = {
     hardware = import ./hardware.nix {
-      inherit (params) system hostId diskEncryptionKeyFile persistDirBackup persistDirNoBackup;
+      inherit (params)
+        system
+        hostId
+        diskEncryptionKeyFile
+        persistDirBackup
+        persistDirNoBackup
+        ;
     };
     impermanence = import ./impermanence.nix {
       inherit (params) persistDirBackup persistDirNoBackup;
       secretsDir = params.secrets.dir;
     };
     users = import ./users.nix {
-      inherit (params) username sshKey userHashedPassword rootHashedPassword;
+      inherit (params)
+        username
+        sshKey
+        userHashedPassword
+        rootHashedPassword
+        ;
     };
     ssh = import ./ssh.nix {
       persistDir = params.persistDirNoBackup;
@@ -60,7 +72,12 @@
       persistDir = params.persistDirBackup;
     };
     scrutiny = import ./scrutiny.nix {
-      inherit (params.scrutiny) domain port influxDB2Port version;
+      inherit (params.scrutiny)
+        domain
+        port
+        influxDB2Port
+        version
+        ;
       persistDir = params.persistDirNoBackup;
       environmentFile = params.secrets.scrutinyEnvFile;
     };
@@ -88,23 +105,25 @@
   ];
 
   postInstallImports =
-    if !params.isBeforeInstall
-    then [
-      modules.postgres
-      modules.postgresBackup
-      modules.caddy
-      modules.ntfy
-      modules.miniflux
-      modules.searxng
-      modules.davis
-      modules.scrutiny
-      modules.iSponsorBlockTV
-      modules.stirlingPDF
-      modules.qBittorrent
-      modules.tailscale
-    ]
-    else [];
-in {
+    if !params.isBeforeInstall then
+      [
+        modules.postgres
+        modules.postgresBackup
+        modules.caddy
+        modules.ntfy
+        modules.miniflux
+        modules.searxng
+        modules.davis
+        modules.scrutiny
+        modules.iSponsorBlockTV
+        modules.stirlingPDF
+        modules.qBittorrent
+        modules.tailscale
+      ]
+    else
+      [ ];
+in
+{
   imports = commonImports ++ postInstallImports;
   nix.settings = {
     download-buffer-size = 4 * 524288000; # 500 MiB

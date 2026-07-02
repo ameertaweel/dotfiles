@@ -2,7 +2,8 @@
   params,
   pkgs,
   ...
-}: {
+}:
+{
   # Hostname
   networking.hostName = params.hostname;
 
@@ -32,7 +33,11 @@
   users.users.${params.username} = {
     isNormalUser = true;
     description = params.name;
-    extraGroups = ["networkmanager" "wheel" "video"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+    ];
     shell = pkgs.${params.shell};
   };
 

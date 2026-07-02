@@ -10,7 +10,7 @@ let
 in
 {
   imports = [
-    (import (import ./nix/tamal {}).nix-maid).nixosModules.default
+    (import (import ./nix/tamal { }).nix-maid).nixosModules.default
   ];
 
   options = {

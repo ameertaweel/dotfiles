@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (import ./nix/tamal {}) nix-index-database;
+  inherit (import ./nix/tamal { }) nix-index-database;
   packages = import nix-index-database { inherit pkgs; };
 
   cnf = config.custom.nix-index;

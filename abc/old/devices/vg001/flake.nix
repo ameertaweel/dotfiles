@@ -17,34 +17,37 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    params = {
-      hostname = "vg001";
-      username = "labmem001";
-      name = "Ameer Taweel";
-      email = "ameertaweel2002@gmail.com";
-      system = "aarch64-linux";
-      state-version = "24.11";
-      editor = "vim";
-      timezone = "Europe/Vienna";
-      shell = "bash";
-      # Find using `cat /etc/machine-id`
-      machine-id = "5a8f16c0f2344ec4bf4ed1ed18d3830d";
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      params = {
+        hostname = "vg001";
+        username = "labmem001";
+        name = "Ameer Taweel";
+        email = "ameertaweel2002@gmail.com";
+        system = "aarch64-linux";
+        state-version = "24.11";
+        editor = "vim";
+        timezone = "Europe/Vienna";
+        shell = "bash";
+        # Find using `cat /etc/machine-id`
+        machine-id = "5a8f16c0f2344ec4bf4ed1ed18d3830d";
+      };
+    in
+    {
+      # NixOS configuration entrypoint
+      # Available through `nixos-rebuild --flake .#your-hostname`
+      nixosConfigurations.${params.hostname} = inputs.nixpkgs.lib.nixosSystem {
+        inherit (params) system;
+        specialArgs = { inherit inputs outputs params; };
+        modules = [
+          ./configuration.nix
+        ];
+      };
     };
-  in {
-    # NixOS configuration entrypoint
-    # Available through `nixos-rebuild --flake .#your-hostname`
-    nixosConfigurations.${params.hostname} = inputs.nixpkgs.lib.nixosSystem {
-      inherit (params) system;
-      specialArgs = {inherit inputs outputs params;};
-      modules = [
-        ./configuration.nix
-      ];
-    };
-  };
 }

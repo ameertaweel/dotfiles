@@ -1,9 +1,9 @@
-{pkgs, ...}: {
-  imports = [../fonts.nix];
+{ pkgs, ... }: {
+  imports = [ ../fonts.nix ];
 
   programs.mpv = {
     enable = true;
-    scripts = [pkgs.mpvScripts.mpris];
+    scripts = [ pkgs.mpvScripts.mpris ];
     config = {
       sub-font = "Dubai";
     };

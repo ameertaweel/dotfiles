@@ -3,7 +3,8 @@
   lib,
   params,
   ...
-}: {
+}:
+{
   imports = [
     # Disko NixOS Module
     inputs.disko.nixosModules.disko

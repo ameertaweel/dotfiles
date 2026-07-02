@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
@@ -31,7 +31,7 @@
         "dotfiles"
         "workspace"
       ];
-      files = [];
+      files = [ ];
     };
   };
 

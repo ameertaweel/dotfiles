@@ -1,8 +1,13 @@
-{persistDir ? null, ...}: {
+{
+  persistDir ? null,
+  ...
+}:
+{
   config,
   lib,
   ...
-}: {
+}:
+{
   ##############################################################################
   # Service Configuration                                                      #
   ##############################################################################
@@ -19,6 +24,6 @@
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = [config.services.postgresqlBackup.location];
+    ${persistDir}.directories = [ config.services.postgresqlBackup.location ];
   };
 }

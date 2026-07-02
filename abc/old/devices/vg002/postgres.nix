@@ -1,8 +1,13 @@
-{persistDir ? null, ...}: {
+{
+  persistDir ? null,
+  ...
+}:
+{
   config,
   lib,
   ...
-}: {
+}:
+{
   ##############################################################################
   # Service Configuration                                                      #
   ##############################################################################
@@ -16,6 +21,6 @@
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = [config.services.postgresql.dataDir];
+    ${persistDir}.directories = [ config.services.postgresql.dataDir ];
   };
 }

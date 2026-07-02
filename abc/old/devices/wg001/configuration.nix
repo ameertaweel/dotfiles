@@ -2,7 +2,8 @@
   params,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ../../modules/nixos/nix.nix
     ../../modules/nixos/virtualization/docker.nix

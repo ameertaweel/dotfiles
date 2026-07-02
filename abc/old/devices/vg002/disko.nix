@@ -4,12 +4,14 @@
   persistDirBackup,
   persistDirNoBackup,
   ...
-}: {
+}:
+{
   lib,
   inputs,
   ...
-}: {
-  imports = [inputs.disko.nixosModules.disko];
+}:
+{
+  imports = [ inputs.disko.nixosModules.disko ];
 
   disko.devices = {
     disk = {

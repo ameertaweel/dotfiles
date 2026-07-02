@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   shellAliases = {
     # Fast `cd` to parent directory
     ".." = "cd ..";
@@ -15,7 +16,8 @@
     # Create parent directories on demand
     mkdir = "mkdir -pv";
   };
-in {
+in
+{
   home.sessionVariables = {
     GNUPGHOME = "${config.xdg.dataHome}/gnupg";
   };
@@ -41,7 +43,11 @@ in {
       set -o vi
     '';
     historyFile = "${config.xdg.stateHome}/bash/history";
-    historyIgnore = ["ls" "cd" "exit"];
+    historyIgnore = [
+      "ls"
+      "cd"
+      "exit"
+    ];
     inherit shellAliases;
   };
 

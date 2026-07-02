@@ -1,4 +1,8 @@
-{persistDir ? null, ...}: {lib, ...}: {
+{
+  persistDir ? null,
+  ...
+}:
+{ lib, ... }: {
   ##############################################################################
   # Service Configuration                                                      #
   ##############################################################################
@@ -10,6 +14,6 @@
   ##############################################################################
 
   environment.persistence = lib.mkIf (persistDir != null) {
-    ${persistDir}.directories = ["/var/lib/tailscale"];
+    ${persistDir}.directories = [ "/var/lib/tailscale" ];
   };
 }

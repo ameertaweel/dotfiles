@@ -3,11 +3,13 @@
   port,
   version,
   ...
-}: {
+}:
+{
   config,
   outputs,
   ...
-}: {
+}:
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "qBittorrent";
@@ -22,7 +24,7 @@
 
   services.qbittorrent = {
     enable = true;
-    extraArgs = ["--confirm-legal-notice"];
+    extraArgs = [ "--confirm-legal-notice" ];
     webuiPort = port;
     # Generate Password Hash:
     # https://gist.github.com/hastinbe/8b8d247f17481cfc262a98d661bc0fd5

@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 let
-  sources = import ./nix/tamal {};
+  sources = import ./nix/tamal { };
 in
 {
   options = {

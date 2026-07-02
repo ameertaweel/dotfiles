@@ -2,14 +2,17 @@
   params,
   pkgs,
   ...
-}: let
-  mkBorgmaticNotification = {
-    title,
-    urgency ? "NORMAL",
-  }: ''
-    export $(${pkgs.coreutils}/bin/cat /proc/$(${pkgs.procps}/bin/pgrep "gnome-session" -u "${params.username}")/environ | ${pkgs.coreutils}/bin/grep -z '^DBUS_SESSION_BUS_ADDRESS=')
-    ${pkgs.libnotify}/bin/notify-send -u "${urgency}" "${title}" "Run sudo journalctl _SYSTEMD_USER_UNIT=borgmatic.service for details"
-  '';
+}:
+let
+  mkBorgmaticNotification =
+    {
+      title,
+      urgency ? "NORMAL",
+    }:
+    ''
+      export $(${pkgs.coreutils}/bin/cat /proc/$(${pkgs.procps}/bin/pgrep "gnome-session" -u "${params.username}")/environ | ${pkgs.coreutils}/bin/grep -z '^DBUS_SESSION_BUS_ADDRESS=')
+      ${pkgs.libnotify}/bin/notify-send -u "${urgency}" "${title}" "Run sudo journalctl _SYSTEMD_USER_UNIT=borgmatic.service for details"
+    '';
 
   mkBorgmaticHooks = repo: {
     before_backup = [
@@ -59,7 +62,8 @@
       })
     ];
   };
-in {
+in
+{
   services.borgmatic = {
     enable = true;
     # Useful command for systemd calendar event validation
@@ -75,7 +79,7 @@ in {
     backups = {
       knowledge-base = {
         location = {
-          sourceDirectories = ["/home/labmem001/knowledge-base"];
+          sourceDirectories = [ "/home/labmem001/knowledge-base" ];
           repositories = [
             {
               label = "rsync.net";
@@ -119,7 +123,10 @@ in {
       };
       full-system = {
         location = {
-          sourceDirectories = ["/persist-ssd" "/persist-hdd"];
+          sourceDirectories = [
+            "/persist-ssd"
+            "/persist-hdd"
+          ];
           # NOTE: I currently have a huge torrent download
           # TODO: Remove once I figure it out
           extraConfig.exclude_patterns = [

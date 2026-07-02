@@ -15,25 +15,28 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    params = import ./params.nix;
-  in {
-    # NixOS configuration entrypoint
-    # Available through `nixos-rebuild --flake .#your-hostname`
-    # nixos-anywhere --flake .#generic --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
-    nixosConfigurations.${params.hostname} = nixpkgs.lib.nixosSystem {
-      inherit (params) system;
-      specialArgs = {inherit inputs outputs params;};
-      modules = [
-        ./configuration.nix
-      ];
-    };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      params = import ./params.nix;
+    in
+    {
+      # NixOS configuration entrypoint
+      # Available through `nixos-rebuild --flake .#your-hostname`
+      # nixos-anywhere --flake .#generic --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
+      nixosConfigurations.${params.hostname} = nixpkgs.lib.nixosSystem {
+        inherit (params) system;
+        specialArgs = { inherit inputs outputs params; };
+        modules = [
+          ./configuration.nix
+        ];
+      };
 
-    lib = import ./lib.nix;
-  };
+      lib = import ./lib.nix;
+    };
 }

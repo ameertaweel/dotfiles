@@ -4,10 +4,12 @@
   lib,
   params,
   ...
-}: let
+}:
+let
   uint32 = lib.hm.gvariant.mkUint32;
   tuple = lib.hm.gvariant.mkTuple;
-in {
+in
+{
   # Set GNOME GSettings
   dconf.settings = {
     "org/gnome/desktop/interface" = {
@@ -30,16 +32,22 @@ in {
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = map (lang: (tuple ["xkb" lang])) params.langs;
+      sources = map (
+        lang:
+        (tuple [
+          "xkb"
+          lang
+        ])
+      ) params.langs;
     };
 
     # Keybindings
     "org/gnome/desktop/wm/keybindings" = {
       # Don't group windows of the same application type
-      switch-applications = [];
-      switch-applications-backward = [];
-      switch-windows = ["<Super>Tab"];
-      switch-windows-backward = ["<Shift><Super>Tab"];
+      switch-applications = [ ];
+      switch-applications-backward = [ ];
+      switch-windows = [ "<Super>Tab" ];
+      switch-windows-backward = [ "<Shift><Super>Tab" ];
     };
 
     "org/gnome/desktop/notifications" = {
@@ -49,7 +57,7 @@ in {
 
     "org/gnome/desktop/input-sources" = {
       # Use capslock as ctrl
-      xkb-options = ["ctrl:nocaps"];
+      xkb-options = [ "ctrl:nocaps" ];
     };
 
     "org/gnome/desktop/peripherals/keyboard" = {
@@ -139,11 +147,11 @@ in {
 
     # Clipboard Manager
     "org/gnome/shell/extensions/clipboard-history" = {
-      clear-history = [];
+      clear-history = [ ];
       ignore-password-mimes = false;
-      next-entry = [];
+      next-entry = [ ];
       paste-on-selection = false;
-      prev-entry = [];
+      prev-entry = [ ];
       private-mode = false;
     };
   };

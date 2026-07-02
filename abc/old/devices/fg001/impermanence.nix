@@ -1,9 +1,9 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  boot.zfs.requestEncryptionCredentials = ["zssd/enc"];
+  boot.zfs.requestEncryptionCredentials = [ "zssd/enc" ];
   fileSystems."/persist-ssd".neededForBoot = true;
   fileSystems."/persist-hdd".neededForBoot = true;
 
@@ -62,8 +62,8 @@
   environment.persistence."/persist-hdd" = {
     enable = true;
     hideMounts = true;
-    directories = [];
-    files = [];
+    directories = [ ];
+    files = [ ];
 
     users.labmem001 = {
       directories = [
@@ -72,7 +72,7 @@
         "virtual-machines"
         "archive"
       ];
-      files = [];
+      files = [ ];
     };
   };
 

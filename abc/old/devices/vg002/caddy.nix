@@ -3,12 +3,14 @@
   persistDirData ? null,
   environmentFile,
   ...
-}: {
+}:
+{
   config,
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   ##############################################################################
   # Service Configuration                                                      #
   ##############################################################################
@@ -17,7 +19,7 @@
     enable = true;
 
     package = pkgs.caddy.withPlugins {
-      plugins = ["github.com/caddy-dns/porkbun@v0.3.1"];
+      plugins = [ "github.com/caddy-dns/porkbun@v0.3.1" ];
       hash = "sha256-1UyHT1Nhe1FliL2udRjWC1OGUpOewcKRVT89Q5trVdA=";
     };
 
@@ -43,15 +45,16 @@
   # The check for `persistDirLogs != persistDirData` is to prevent an error due
   # to duplicate attribute in attrset.
   environment.persistence =
-    if (persistDirLogs != persistDirData)
-    then {
-      ${persistDirLogs}.directories = lib.mkIf (persistDirLogs != null) [config.services.caddy.logDir];
-      ${persistDirData}.directories = lib.mkIf (persistDirData != null) [config.services.caddy.dataDir];
-    }
-    else {
-      ${persistDirLogs}.directories = lib.mkIf (persistDirLogs != null) [
-        config.services.caddy.logDir
-        config.services.caddy.dataDir
-      ];
-    };
+    if (persistDirLogs != persistDirData) then
+      {
+        ${persistDirLogs}.directories = lib.mkIf (persistDirLogs != null) [ config.services.caddy.logDir ];
+        ${persistDirData}.directories = lib.mkIf (persistDirData != null) [ config.services.caddy.dataDir ];
+      }
+    else
+      {
+        ${persistDirLogs}.directories = lib.mkIf (persistDirLogs != null) [
+          config.services.caddy.logDir
+          config.services.caddy.dataDir
+        ];
+      };
 }

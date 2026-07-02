@@ -2,13 +2,14 @@
   lib,
   params,
   ...
-}: let
+}:
+let
   ifDefault = lib.mkIf (params.browser == "firefox");
-in {
+in
+{
   programs.firefox.enable = true;
 
   xdg.mime.enable = ifDefault true;
   xdg.mimeApps.enable = ifDefault true;
-  xdg.mimeApps.defaultApplications =
-    ifDefault (import ./default-browser.nix "firefox");
+  xdg.mimeApps.defaultApplications = ifDefault (import ./default-browser.nix "firefox");
 }

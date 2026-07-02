@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Enable the GNOME Desktop Environment
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
@@ -24,15 +24,16 @@
   ];
 
   # Install GNOME extensions
-  environment.systemPackages =
-    [pkgs.gnome-tweaks]
-    ++ (with pkgs.gnomeExtensions; [
-      hibernate-status-button # Hibernate in Power Options
-      appindicator # System Tray
-      clipboard-history # Clipboard Manager
-      just-perfection
-    ]);
+  environment.systemPackages = [
+    pkgs.gnome-tweaks
+  ]
+  ++ (with pkgs.gnomeExtensions; [
+    hibernate-status-button # Hibernate in Power Options
+    appindicator # System Tray
+    clipboard-history # Clipboard Manager
+    just-perfection
+  ]);
 
   # Ensure gnome-settings-daemon udev rules are enabled
-  services.udev.packages = [pkgs.gnome-settings-daemon];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
 }

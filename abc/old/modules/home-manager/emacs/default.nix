@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   programs.emacs.enable = true;
 
   home.file.doomEmacsConfig = {

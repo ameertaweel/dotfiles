@@ -6,12 +6,14 @@
   appSecretFile,
   persistDir ? null,
   ...
-}: {
+}:
+{
   config,
   lib,
   outputs,
   ...
-}: {
+}:
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "Davis";

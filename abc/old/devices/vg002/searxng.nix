@@ -4,11 +4,13 @@
   version,
   environmentFile,
   ...
-}: {
+}:
+{
   config,
   outputs,
   ...
-}: {
+}:
+{
   assertions = [
     (outputs.lib.assertPkgVersion {
       displayName = "SearXNG";
@@ -31,7 +33,10 @@
         autocomplete = "brave";
         favicon_resolver = "duckduckgo";
         default_lang = "en";
-        languages = ["en" "ar"];
+        languages = [
+          "en"
+          "ar"
+        ];
       };
 
       server = {
@@ -52,16 +57,28 @@
       };
 
       plugins = {
-        "searx.plugins.calculator.SXNGPlugin" = {active = true;};
-        "searx.plugins.hash_plugin.SXNGPlugin" = {active = true;};
-        "searx.plugins.self_info.SXNGPlugin" = {active = true;};
-        "searx.plugins.tracker_url_remover.SXNGPlugin" = {active = true;};
-        "searx.plugins.unit_converter.SXNGPlugin" = {active = true;};
-        "searx.plugins.hostnames.SXNGPlugin" = {active = true;};
+        "searx.plugins.calculator.SXNGPlugin" = {
+          active = true;
+        };
+        "searx.plugins.hash_plugin.SXNGPlugin" = {
+          active = true;
+        };
+        "searx.plugins.self_info.SXNGPlugin" = {
+          active = true;
+        };
+        "searx.plugins.tracker_url_remover.SXNGPlugin" = {
+          active = true;
+        };
+        "searx.plugins.unit_converter.SXNGPlugin" = {
+          active = true;
+        };
+        "searx.plugins.hostnames.SXNGPlugin" = {
+          active = true;
+        };
       };
 
-      hostnames.remove = ["nixos.wiki"];
-      hostnames.high_priority = ["wiki.nixos.org"];
+      hostnames.remove = [ "nixos.wiki" ];
+      hostnames.high_priority = [ "wiki.nixos.org" ];
     };
   };
 

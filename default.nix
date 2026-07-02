@@ -1,5 +1,5 @@
 let
-  pkgs = import ./nix/nixpkgs.nix;
+  pkgs = import ./nix/nixpkgs.nix { };
 
   # Custom packages, that can be defined similarly to ones from Nixpkgs
   # You can build them using:
