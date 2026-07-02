@@ -7,14 +7,17 @@
   nix-wrapper-modules ? (import ../nix-wrapper-modules.nix { inherit pkgs; }),
 }:
 let
-  wrappedPkgs = import ./wrapped.nix { inherit nix-wrapper-modules; };
+  wrapperToPkg =
+    wrapper:
+    wrapper.wrap (
+      { ... }: {
+        inherit pkgs;
+      }
+    );
+  wrappers = import ./wrappers.nix { inherit nix-wrapper-modules; };
+  wrappedPkgs = builtins.mapAttrs (k: v: wrapperToPkg v) wrappers;
 in
 {
   # example = pkgs.callPackage ./example { };
-
-  tmux = wrappedPkgs.tmux.wrap (
-    { ... }: {
-      inherit pkgs;
-    }
-  );
 }
+// wrappedPkgs

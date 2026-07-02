@@ -8,26 +8,6 @@ let
     path: extraParams: import path (extraParams // { inherit nix-wrapper-modules pkgs; });
 in
 {
-  btop = (callWrappedPkg ./btop.nix { }).wrap (
-    { ... }: {
-      inherit pkgs;
-    }
-  );
-  tealdeer = (callWrappedPkg ./tealdeer.nix { }).wrap (
-    { ... }: {
-      inherit pkgs;
-    }
-  );
-  tmux = (callWrappedPkg ./tmux { }).wrap (
-    { ... }: {
-      inherit pkgs;
-    }
-  );
-  vim = (callWrappedPkg ./vim { }).wrap (
-    { ... }: {
-      inherit pkgs;
-    }
-  );
   wezterm = (callWrappedPkg ./wezterm { }).wrap (
     { ... }: {
       inherit pkgs;
