@@ -12,4 +12,5 @@ in
   tealdeer = importWrapped "tealdeer";
   tmux = importWrapped "tmux";
   vim = importWrapped "vim";
+  wezterm = importWrapped "wezterm";
 }
