@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   nix = {
-    package = pkgs.nixVersions.latest;
-
     channel.enable = false;
 
     settings = {
