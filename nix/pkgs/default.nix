@@ -7,6 +7,9 @@
   nix-wrapper-modules ? (import ../nix-wrapper-modules.nix { inherit pkgs; }),
 }:
 let
+  sources = import ../../nix/tamal { };
+  nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
+
   wrapperToPkg =
     wrapper:
     wrapper.wrap (
@@ -14,7 +17,9 @@ let
         inherit pkgs;
       }
     );
-  wrappers = import ./wrappers.nix { inherit nix-wrapper-modules; };
+  wrappers = import ./wrappers.nix {
+    inherit nix-wrapper-modules nix-jetbrains-plugins;
+  };
   wrappedPkgs = builtins.mapAttrs (k: v: wrapperToPkg v) wrappers;
 in
 {
