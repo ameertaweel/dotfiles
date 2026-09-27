@@ -3,7 +3,8 @@
 #   - New CLI: `nix develop --file shell.nix default`
 #   - Old CLI: `nix-shell -A default`
 {
-  pkgs ? (import ./nix/nixpkgs.nix { }),
+  pkgs ? (import ./nix/inputs.nix { }).pkgs,
+  nixhooks ? (import ./nix/inputs.nix { }).nixhooks,
 }:
 {
   default = pkgs.mkShell {
@@ -14,8 +15,25 @@
       # Just command-runner
       pkgs.just
 
-      # This project uses nixfmt-tree for formatting
-      pkgs.nixfmt-tree
+      # This project uses nixfmt for formatting
+      pkgs.nixfmt
     ];
+
+    shellHook =
+      let
+        hooks = nixhooks.mkHooks {
+          hooks = {
+            nixfmt-check = {
+              entry = "${pkgs.nixfmt}/bin/nixfmt";
+              args = [ "--check" ];
+              files = "\\.nix$";
+              exclude = "^nix/tamal";
+            };
+          };
+        };
+      in
+      ''
+        ${hooks.install-hooks}/bin/install-hooks
+      '';
   };
 }

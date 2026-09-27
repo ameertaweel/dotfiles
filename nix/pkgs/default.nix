@@ -3,13 +3,11 @@
 #   - New CLI: `nix build --file . packages.PACKAG_NAME`
 #   - Old CLI: `nix-build . --attr packages.PACKAG_NAME`
 {
-  pkgs ? (import ../nixpkgs.nix { }),
-  nix-wrapper-modules ? (import ../nix-wrapper-modules.nix { inherit pkgs; }),
+  pkgs ? (import ../inputs.nix { }).pkgs,
+  nix-wrapper-modules ? (import ../inputs.nix { }).nix-wrapper-modules,
+  nix-jetbrains-plugins ? (import ../inputs.nix { }).nix-jetbrains-plugins,
 }:
 let
-  sources = import ../../nix/tamal { };
-  nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
-
   wrapperToPkg =
     wrapper:
     wrapper.wrap (

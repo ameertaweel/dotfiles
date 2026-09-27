@@ -12,5 +12,20 @@ let
       overlays.additions
     ];
   };
+
+  nix-wrapper-modules = import sources.nix-wrapper-modules {
+    inherit pkgs;
+  };
+
+  nix-jetbrains-plugins = import sources.nix-jetbrains-plugins;
+
+  nixhooks = import sources.nixhooks { inherit pkgs; };
 in
-pkgs
+{
+  inherit
+    pkgs
+    nix-wrapper-modules
+    nix-jetbrains-plugins
+    nixhooks
+    ;
+}
