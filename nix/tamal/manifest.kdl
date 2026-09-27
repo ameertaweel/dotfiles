@@ -20,6 +20,17 @@ inputs {
 		// patches nixpkgs-pr
 	}
 
+	nixhooks {
+		archive {
+			url "https://tangled.org/poacher.dev/nixhooks/archive/{{fresh_value}}.tar.gz"
+		}
+		hash algorithm=SHA-256
+		fresh-cmd {
+			$ git ls-remote "https://tangled.org/poacher.dev/nixhooks" --refs "refs/heads/main"
+			| cut -f1
+		}
+	}
+
 	nix-index-database {
 		archive {
 			url "https://github.com/nix-community/nix-index-database/archive/{{fresh_value}}.tar.gz"
