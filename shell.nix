@@ -33,7 +33,7 @@
         };
       in
       ''
-        ${hooks.install-hooks}/bin/install-hooks
+        ${hooks.packages.install-hooks}/bin/install-hooks
       '';
   };
 }
