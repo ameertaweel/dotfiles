@@ -44,11 +44,11 @@ inputs {
 
 	nix-maid {
 		archive {
-			url "https://github.com/viperML/nix-maid/archive/{{fresh_value}}.tar.gz"
+			url "https://codeberg.org/viperML/nix-maid/archive/{{fresh_value}}.tar.gz"
 		}
 		hash algorithm=SHA-256
 		fresh-cmd {
-			$ git ls-remote "https://github.com/viperML/nix-maid.git" --refs "refs/heads/master"
+			$ git ls-remote "https://codeberg.org/viperML/nix-maid.git" --refs "refs/heads/master"
 			| cut -f1
 		}
 		// patches nix-maid-pr
