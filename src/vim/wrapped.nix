@@ -6,13 +6,13 @@ nix-wrapper-modules.wrappers.vim.apply (
       " Use Vim settings rather than Vi settings
       set nocompatible
 
-      source ${./xdg_cache.vim}
-      source ${./settings.vim}
-      source ${./keybindings.vim}
+      source ${./config/xdg_cache.vim}
+      source ${./config/settings.vim}
+      source ${./config/keybindings.vim}
 
       " Plugins
-      source ${./plugins/lightline.vim} " Statusbar
-      source ${./plugins/window-swap.vim} " Swap split windows with ease
+      source ${./config/plugins/lightline.vim} " Statusbar
+      source ${./config/plugins/window-swap.vim} " Swap split windows with ease
     '';
 
     plugins = [

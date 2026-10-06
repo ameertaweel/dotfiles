@@ -3,7 +3,7 @@
 let
   importWrapped =
     name:
-    import ../../src/${name} {
+    import ../../src/${name}/wrapped.nix {
       inherit nix-wrapper-modules;
     };
 in

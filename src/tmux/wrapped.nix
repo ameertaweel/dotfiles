@@ -4,13 +4,13 @@ nix-wrapper-modules.wrappers.tmux.apply (
   { ... }: {
     configAfter = ''
       # Keybindings
-      source-file ${./keybindings.tmux}
+      source-file ${./config/keybindings.tmux}
 
       # Styles
-      source-file ${./styles.tmux}
+      source-file ${./config/styles.tmux}
 
       # Settings
-      source-file ${./settings.tmux}
+      source-file ${./config/settings.tmux}
     '';
   }
 )
