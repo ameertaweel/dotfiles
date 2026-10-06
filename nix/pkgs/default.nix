@@ -2,10 +2,13 @@
 # You can build them using:
 #   - New CLI: `nix build --file . packages.PACKAG_NAME`
 #   - Old CLI: `nix-build . --attr packages.PACKAG_NAME`
+let
+  inputs = import ../inputs.nix { };
+in
 {
-  pkgs ? (import ../inputs.nix { }).pkgs,
-  nix-wrapper-modules ? (import ../inputs.nix { }).nix-wrapper-modules,
-  nix-jetbrains-plugins ? (import ../inputs.nix { }).nix-jetbrains-plugins,
+  pkgs ? inputs.pkgs,
+  nix-wrapper-modules ? inputs.nix-wrapper-modules,
+  nix-jetbrains-plugins ? inputs.nix-jetbrains-plugins,
 }:
 let
   wrapperToPkg =

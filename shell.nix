@@ -2,9 +2,12 @@
 # You can activate it through:
 #   - New CLI: `nix develop --file shell.nix default`
 #   - Old CLI: `nix-shell -A default`
+let
+  inputs = import ./nix/inputs.nix { };
+in
 {
-  pkgs ? (import ./nix/inputs.nix { }).pkgs,
-  nixhooks ? (import ./nix/inputs.nix { }).nixhooks,
+  pkgs ? inputs.pkgs,
+  nixhooks ? inputs.nixhooks,
 }:
 {
   default = pkgs.mkShell {
