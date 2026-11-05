@@ -5,12 +5,12 @@ let g:lightline = {
 	\			[ 'gitbranch', 'readonly', 'filename', 'modified' ]
 	\		],
 	\		'right': [
-	\			[ 'lineinfo' ],
+	\		[ 'lineinfo' ],
 	\			[ 'percent' ],
 	\			[ 'filetype' ]
 	\		]
 	\	},
-	\	'component': {
-	\		'gitbranch': '%{FugitiveHead()}'
+	\	'component_function': {
+	\		'gitbranch': 'FugitiveHead'
 	\	}
 	\}

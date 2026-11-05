@@ -28,7 +28,7 @@ set laststatus=2
 set confirm
 
 " Allow backspacing over indention, line breaks and insertion start
-set backspace="indent,eol,start"
+set backspace=indent,eol,start
 
 " Enable mouse support for scrolling and resizing
 set mouse=a
@@ -131,7 +131,7 @@ set swapfile
 " Automatically re-balance windows on resize
 augroup AUTO_REBALANCE
 	autocmd!
-	autocmd VimResized * :wincmd =
+	autocmd VimResized * wincmd =
 augroup end
 
 " Disable auto-commenting

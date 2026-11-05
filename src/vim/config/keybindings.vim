@@ -60,7 +60,7 @@ nnoremap <leader>th :noh<cr>
 nnoremap <leader>rg :reg<cr>
 
 " Make . to work with visually selected lines
-vnoremap . :normal.<cr>
+vnoremap . :normal .<cr>
 
 " Swap Window
 nnoremap <leader>ww :call WindowSwap#EasyWindowSwap()<cr>
