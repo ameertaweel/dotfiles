@@ -23,6 +23,7 @@ let
 in
 {
   inherit
+    sources
     pkgs
     nix-wrapper-modules
     nix-jetbrains-plugins
