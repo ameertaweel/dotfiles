@@ -27,7 +27,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 }:
 
 let lock = builtins.fromJSON (builtins.readFile ./lock.json); in
-assert (lock.v == "1.5.0");
+assert (lock.v == "2.0.0");
 let
 	isNonemptyString = x: builtins.isString x && x != "";
 
@@ -64,7 +64,6 @@ let
 			// (if isNonemptyString name then { inherit name; } else { }))
 		) kind.ur kind.ms;
 
-
 	builtin-to-input = input-name: input:
 		let
 			name = input.sn;
@@ -83,9 +82,27 @@ let
 		else
 			builtin-to-input "bootstrap-nixpkgs-for-nixtamal" (
 				if builtins.isString bootstrap-nixpkgs-lock-name then
-					lock.i.${bootstrap-nixpkgs-lock-name}
+					if lock.i ? ${bootstrap-nixpkgs-lock-name} then
+						lock.i.${bootstrap-nixpkgs-lock-name}
+					else
+						throw "Input 「${bootstrap-nixpkgs-lock-name}」 missing from the lock.json, so Nixtamal is not bootstrapable; lock if you forgot or look for typos."
+				else if lock.i ? nixpkgs-nixtamal then
+					lock.i.nixpkgs-nixtamal
+				else if lock.i ? nixpkgs then
+					lock.i.nixpkgs
 				else
-					lock.i.nixpkgs-nixtamal or lock.i.nixpkgs
+					let np = builtins.tryEval <nixpkgs>; in
+					if np.success && builtins.isPath np.value then
+						builtins.warn
+							"Using system-dependent <nixpkgs>; this is more than likely ‘safe’ for Nixtamal’s bootstrapping, but technically not reproducible"
+							np.value
+					else
+						throw (builtins.concatStringsSep "\n" [
+							"No Nixtamal bootstrapping Nixpkgs to choose from. Pick from:"
+							"❶ Set one of Nixtamal’s import arguments `bootstrap-nixpkgs-lock-name` or `bootstrap-nixpkgs`"
+							"❷ Locking an input named `nixpkgs-nixtamal` or `nixpkgs` in the manifest.kdl"
+							"❸ Setting $NIX_PATH so `<nixpkgs>` can be used (less reproducible, doesn’t work in pure eval mode)"
+						])
 			);
 
 	pkgs =
@@ -97,7 +114,6 @@ let
 			};
 
 	inherit (pkgs) lib;
-
 
 	fetch-zip = { input-name, name, kind, hash }:
 		pkgs.fetchzip (
